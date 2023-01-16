@@ -1,3 +1,4 @@
+import Button from '@/components/Button';
 import Head from 'next/head';
 import React from 'react';
 
@@ -19,9 +20,18 @@ const Home = () => (
       />
     </Head>
 
-    <div className="bg-slate-600">
-      Hello world!
-    </div>
+    <Button.Default
+      onClick={() => console.log(5)}
+      size="large"
+    >
+      Label
+    </Button.Default>
+
+    <Button.Outline
+      size="large"
+    >
+      Label
+    </Button.Outline>
 
   </div>
 );
