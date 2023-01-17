@@ -1,6 +1,10 @@
 import Button from '@/components/Button';
 import Head from 'next/head';
 import React from 'react';
+import ArrowIcon from '../assets/ArrowIcon.svg';
+// import { ReactComponent as ArrowIcon } from '../assets/ArrowIcon.svg';
+
+console.log(ArrowIcon);
 
 const Home = () => (
   <div>
@@ -21,6 +25,8 @@ const Home = () => (
     </Head>
 
     <Button.Default
+      // icon={<ArrowIcon />}
+      icon={ArrowIcon}
       onClick={() => console.log(5)}
       size="large"
     >
