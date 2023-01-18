@@ -27,24 +27,16 @@ const ButtonTemplate: React.FC<ButtonTemplateProps> = ({
   }, [size]);
 
   return (
-
     <button
       className={`${getStyle} ${className} ${bgColor} rounded-md`}
       disabled={disabled}
       onClick={onClick}
       type="button"
     >
-
-      {children}
-      {
-        icon && (
-          <img
-            alt="asd"
-            className={iconPosition === 'left' ? 'order-1' : 'order-0'}
-            src={icon as string}
-          />
-        )
-      }
+      <div className="flex items-center">
+        {children && <div className={`mx-[5px] ${iconPosition === 'left' ? 'order-1' : ''}`}>{children}</div>}
+        {icon && (<div>{icon}</div>)}
+      </div>
     </button>
   );
 };
