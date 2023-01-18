@@ -2,7 +2,8 @@ import React from 'react';
 import cn from 'classnames';
 import s from './Button.module.css';
 
-export type IconPositions = 'left' | 'center' | 'right';
+/** Возможные варианты расположения иконок относительно текста кнопки */
+export type IconPositions = 'left' | 'right';
 
 export interface ButtonProps {
   children?: React.ReactNode;
@@ -36,16 +37,8 @@ const Button: React.FC<ButtonProps> = ({
       onClick={onClick}
       type="button"
     >
-
       {children && <div className={iconPosition === 'left' ? 'order-1' : 'order-0'}>{children}</div>}
-      {
-        icon && (
-          <img
-            alt="icon"
-            src={icon as string}
-          />
-        )
-      }
+      {icon && <div className={iconPosition === 'left' ? 'mr-[5px]' : 'ml-[5px]'}>{icon}</div>}
     </button>
   );
 };

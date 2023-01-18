@@ -37,7 +37,7 @@ const Home = () => (
     </Button>
 
     <Button
-      icon={ArrowIcon}
+      icon={<ArrowIcon />}
       size="lg"
       variant="secondary"
     >
