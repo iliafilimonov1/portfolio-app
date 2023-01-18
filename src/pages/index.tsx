@@ -2,9 +2,6 @@ import Button from '@/components/Button';
 import Head from 'next/head';
 import React from 'react';
 import ArrowIcon from '../assets/ArrowIcon.svg';
-// import { ReactComponent as ArrowIcon } from '../assets/ArrowIcon.svg';
-
-console.log(ArrowIcon);
 
 const Home = () => (
   <div>
@@ -24,20 +21,55 @@ const Home = () => (
       />
     </Head>
 
-    <Button.Default
-      // icon={<ArrowIcon />}
+    <Button
       icon={ArrowIcon}
-      onClick={() => console.log(5)}
-      size="large"
+      size="sm"
+      variant="primary"
+      disabled
     >
-      Label
-    </Button.Default>
+      Button
+    </Button>
 
-    <Button.Outline
-      size="large"
+    <Button
+      icon={ArrowIcon}
+      size="md"
+      variant="primary"
     >
-      Label
-    </Button.Outline>
+      Button
+    </Button>
+
+    <Button
+      icon={ArrowIcon}
+      size="lg"
+      variant="primary"
+    >
+      Button
+    </Button>
+
+    <Button
+      icon={ArrowIcon}
+      size="lg"
+      variant="secondary"
+    >
+      Secondary
+    </Button>
+
+    <Button
+      icon={ArrowIcon}
+      size="md"
+      variant="negative"
+      disabled
+    >
+      Negative
+    </Button>
+
+    <Button
+      icon={ArrowIcon}
+      size="md"
+      variant="success"
+    >
+      Success
+    </Button>
 
   </div>
 );

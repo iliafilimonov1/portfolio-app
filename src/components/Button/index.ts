@@ -1,4 +1,4 @@
-import ButtonTemplate from './ButtonTemplate';
-import Outline from './Outline';
+import Button from './Button';
+// import Outline from './Outline';
 
-export default { Default: ButtonTemplate, Outline };
+export default Button;
