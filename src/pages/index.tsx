@@ -20,16 +20,6 @@ const Home = () => (
         rel="icon"
       />
     </Head>
-    <ArrowIcon />
-    <Button.Default
-      className="bg-blue-600"
-      icon={<ArrowIcon />}
-      iconPosition="left"
-      size="large"
-    >
-      Arrow
-    </Button.Default>
-
     <Button
       icon={ArrowIcon}
       size="md"

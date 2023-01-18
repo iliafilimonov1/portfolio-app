@@ -30,7 +30,6 @@ const Button: React.FC<ButtonProps> = ({
   });
 
   return (
-
     <button
       className={classes}
       disabled={disabled}
@@ -38,12 +37,11 @@ const Button: React.FC<ButtonProps> = ({
       type="button"
     >
 
-      {children}
+      {children && <div className={iconPosition === 'left' ? 'order-1' : 'order-0'}>{children}</div>}
       {
         icon && (
           <img
-            alt=""
-            className={iconPosition === 'left' ? 'order-1' : 'order-0'}
+            alt="icon"
             src={icon as string}
           />
         )
