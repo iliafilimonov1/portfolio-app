@@ -1,24 +1,44 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import LoadFile from '@/components/ui/LoadFile/LoadFile';
+import { Languages } from '@/types';
 import React, { useState } from 'react';
 import { createWorker } from 'tesseract.js';
 
-type Language = 'eng' | 'rus';
+const DEFAULT_LANGUAGE = 'eng';
 
+/** Страница распознавания текста по картинке */
 const Tesseracts: React.FC = () => {
   const [recognizedText, setRecognizedText] = useState<string>();
   const [selectedImage, setSelectedImage] = useState<string[]>();
-  const [language, setLanguage] = useState<Language>('rus');
+  const [language, setLanguage] = useState<keyof typeof Languages>(DEFAULT_LANGUAGE);
+  const [progress, setProgress] = useState<number>();
+
+  /** Возможность демонстрации загрузки */
+  const canShowProgress = progress && progress !== 100;
+
+  /** Обработчик прогресса в процентах */
+  const setProgressHandler = (progressNumber: number | undefined) => {
+    if (progressNumber) { setProgress(progressNumber * 100); }
+  };
+
+  /** Функция для работы с tesseract */
   const recognize = async (files: FileList) => {
     if (!files.length) {
       return;
     }
-
+    /** Извлечение URL для парсера */
     const filesURL = Array.from(files)?.map((file) => URL.createObjectURL(file));
     setSelectedImage(filesURL);
 
     try {
-      const worker = await createWorker();
+      setProgressHandler(0.01);
+      const worker = await createWorker({
+        logger: (m: { progress: number }) => {
+          console.log(m.progress);
+
+          setProgressHandler(m.progress);
+        },
+      });
       await worker.loadLanguage(language);
       await worker.initialize(language);
       const { data: { text } } = await worker.recognize(filesURL[0]);
@@ -29,6 +49,14 @@ const Tesseracts: React.FC = () => {
     }
   };
 
+  /** При изменении языка сбрасываем все */
+  const onSelectLanguageHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value as keyof typeof Languages;
+    setLanguage(value);
+    setSelectedImage(undefined);
+    setRecognizedText(undefined);
+  };
+
   return (
     <div className="p-6 flex flex-col items-center gap-4">
       <h1 className="font-bold text-3xl">Tesseract test</h1>
@@ -36,11 +64,18 @@ const Tesseracts: React.FC = () => {
         <div className="flex text-white bg-slate-600 p-2 rounded-md">
           <h2>Text language in the pictures:</h2>
           <select
-            className="bg-transparent"
-            onChange={(e) => setLanguage(e.target.value as Language)}
+            className="bg-transparent cursor-pointer"
+            onChange={onSelectLanguageHandler}
           >
-            <option value="rus">Русский</option>
-            <option value="eng">English</option>
+            {Object.entries(Languages).map(([key, value]) => (
+              <option
+                key={key}
+                selected={key === DEFAULT_LANGUAGE}
+                value={key}
+              >
+                {value}
+              </option>
+            ))}
           </select>
         </div>
       </div>
@@ -49,10 +84,16 @@ const Tesseracts: React.FC = () => {
           callBack={recognize}
           previewFileUrl={selectedImage}
         />
-
-        <div className="bg-white w-[50vw] p-4 border-[1px] rounded-md">
+        <div
+          className="
+            bg-white w-[50vw] p-4 border-[1px] rounded-md
+            flex flex-col justify-center items-center
+          "
+        >
           <div className="text-center font-bold mb-2">Result</div>
-          {recognizedText}
+          {canShowProgress && <div>{`${progress.toFixed()}%`}</div>}
+          {!canShowProgress && recognizedText}
+          {canShowProgress && <div className="animate-spin h-10 w-10 border-2 rounded-full border-b-gray-400" /> }
         </div>
       </div>
     </div>

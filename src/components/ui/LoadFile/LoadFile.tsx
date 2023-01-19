@@ -40,7 +40,7 @@ const LoadFile: React.FC<LoadFileProps> = ({
         {
           previewFileUrl
             ? (
-              <div className="absolute">
+              <div className="absolute top-0">
                 {previewFileUrl.map((url) => (
                   <img
                     key={url}
