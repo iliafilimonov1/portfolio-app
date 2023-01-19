@@ -19,7 +19,7 @@ const LoadFile: React.FC<LoadFileProps> = ({
       className={
         extractStyles`
       input-file flex-1 h-min items-center justify-center
-      bg-slate-500 px-4 py-2 rounded-md font-bold text-white text-center
+      bg-slate-200 px-4 py-2 rounded-md font-bold text-gray-500 text-center
     `
       }
       htmlFor="drop"
@@ -29,8 +29,8 @@ const LoadFile: React.FC<LoadFileProps> = ({
         {title}
       </div>
       <div className="
-        flex items-center justify-center text-3xl font-normal relative overflow-auto
-        text-gray-600 min-w-[300px] min-h-[300px] border-dashed border-black bg-white border-[1px]"
+        flex items-center justify-center font-bold relative overflow-auto hover:opacity-70
+        text-gray-500 min-w-[300px] min-h-[300px] border-dashed border-gray-500 bg-white border-[1px]"
       >
         <input
           id="drop"

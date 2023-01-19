@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import LoadFile from '@/components/ui/LoadFile/LoadFile';
+import { extractStyles } from '@/services/utils';
 import { Languages } from '@/types';
 import React, { useState } from 'react';
 import { createWorker } from 'tesseract.js';
@@ -16,9 +17,12 @@ const Tesseracts: React.FC = () => {
   /** Возможность демонстрации загрузки */
   const canShowProgress = progress && progress !== 100;
 
+  /** Доступность кнопки очистки */
+  const canShowClearButton = !canShowProgress && (selectedImage || recognizedText);
+
   /** Обработчик прогресса в процентах */
   const setProgressHandler = (progressNumber: number | undefined) => {
-    if (progressNumber) { setProgress(progressNumber * 100); }
+    if (progressNumber) { setProgress(progressNumber * 100); } else { setProgress(undefined); }
   };
 
   /** Функция для работы с tesseract */
@@ -34,8 +38,6 @@ const Tesseracts: React.FC = () => {
       setProgressHandler(0.01);
       const worker = await createWorker({
         logger: (m: { progress: number }) => {
-          console.log(m.progress);
-
           setProgressHandler(m.progress);
         },
       });
@@ -49,19 +51,28 @@ const Tesseracts: React.FC = () => {
     }
   };
 
+  /** Хэндлер очистки значений кроме выбора языка */
+  const clearHandler = () => {
+    if (progress && progress !== 100) {
+      return;
+    }
+    setSelectedImage(undefined);
+    setRecognizedText(undefined);
+    setProgressHandler(undefined);
+  };
+
   /** При изменении языка сбрасываем все */
   const onSelectLanguageHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value as keyof typeof Languages;
     setLanguage(value);
-    setSelectedImage(undefined);
-    setRecognizedText(undefined);
+    clearHandler();
   };
 
   return (
     <div className="p-6 flex flex-col items-center gap-4">
-      <h1 className="font-bold text-3xl">Tesseract test</h1>
+      <h1 className="font-bold text-3xl text-gray-600">Tesseract test</h1>
       <div className="flex flex-col self-start">
-        <div className="flex text-white bg-slate-600 p-2 rounded-md">
+        <div className="flex bg-slate-200 p-2 rounded-md text-gray-500">
           <h2>Text language in the pictures:</h2>
           <select
             className="bg-transparent cursor-pointer"
@@ -87,7 +98,7 @@ const Tesseracts: React.FC = () => {
         <div
           className="
             bg-white w-[50vw] p-4 border-[1px] rounded-md
-            flex flex-col justify-center items-center
+            flex flex-col justify-center items-center text-gray-500
           "
         >
           <div className="text-center font-bold mb-2">Result</div>
@@ -96,6 +107,18 @@ const Tesseracts: React.FC = () => {
           {canShowProgress && <div className="animate-spin h-10 w-10 border-2 rounded-full border-b-gray-400" /> }
         </div>
       </div>
+      <button
+        className={
+          extractStyles`{
+            px-10 py-2 rounded-md text-gray-500 self-end
+            ${canShowClearButton ? 'bg-gray-200' : 'bg-gray-100'}
+          }`
+        }
+        onClick={() => clearHandler()}
+        type="button"
+      >
+        Clear
+      </button>
     </div>
   );
 };
