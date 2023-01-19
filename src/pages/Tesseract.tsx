@@ -17,6 +17,7 @@ const Tesseracts: React.FC = () => {
 
     const fileUrl = URL.createObjectURL(file);
     setSelectedImage(fileUrl);
+
     try {
       const worker = await createWorker();
       await worker.loadLanguage(language);
@@ -46,12 +47,7 @@ const Tesseracts: React.FC = () => {
           </h2>
           <select onChange={(e) => setLanguage(e.target.value as Language)}>
             <option value="rus">Русский</option>
-            <option
-              value="eng"
-              selected
-            >
-              Английский
-            </option>
+            <option value="eng">Английский</option>
           </select>
           {' '}
           <img
