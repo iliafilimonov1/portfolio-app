@@ -1,4 +1,4 @@
-import Button from '@/components/Button';
+import Button from '@/components/ui/Button';
 import Head from 'next/head';
 import React from 'react';
 import ArrowIcon from '../assets/ArrowIcon.svg';
