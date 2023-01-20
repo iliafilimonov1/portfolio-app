@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import React from 'react';
-import Button from '../ui/Button';
+import Button from '../ui/Button/Button';
 
 const navItems = [
   { label: 'Home', link: '/' },
@@ -14,13 +14,13 @@ const Navigation: React.FC = () => {
     <div className="flex items-center fap-[20px] px-2 py-6 shadow-lg">
       {
         navItems.map((item) => (
-          <Button.Default
+          <Button
             key={item.link}
             onClick={() => router.push(item.link)}
-            size="small"
+            size="sm"
           >
             {item.label}
-          </Button.Default>
+          </Button>
         ))
       }
     </div>
