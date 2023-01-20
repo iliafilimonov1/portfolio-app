@@ -2,3 +2,4 @@
 @tailwind components;
 @tailwind utilities;
 @import "./tesseract.module.css";
+@import "./Button.module.css";

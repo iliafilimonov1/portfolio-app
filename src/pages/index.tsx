@@ -1,7 +1,5 @@
-import Button from '@/components/ui/Button';
 import Head from 'next/head';
 import React from 'react';
-import ArrowIcon from '../assets/ArrowIcon.svg';
 
 const Home = () => (
   <div>
@@ -20,22 +18,7 @@ const Home = () => (
         rel="icon"
       />
     </Head>
-    <ArrowIcon />
-    <Button.Default
-      className="bg-blue-600"
-      icon={<ArrowIcon />}
-      iconPosition="left"
-      size="large"
-    >
-      Arrow
-    </Button.Default>
-
-    <Button.Outline
-      size="large"
-    >
-      Label
-    </Button.Outline>
-
+    <div className="min-h-screen bg-blue-300" />
   </div>
 );
 
