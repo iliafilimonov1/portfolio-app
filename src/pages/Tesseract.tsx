@@ -90,14 +90,14 @@ const Tesseracts: React.FC = () => {
           </select>
         </div>
       </div>
-      <div className="flex gap-4 justify-between w-full">
+      <div className="flex gap-4 justify-between w-full flex-col md:flex-row">
         <LoadFile
           callBack={recognize}
           previewFileUrl={selectedImage}
         />
         <div
           className="
-            bg-white w-[50vw] p-4 border-[1px] rounded-md
+            bg-white w-full p-4 border-[1px] rounded-md
             flex flex-col justify-center items-center text-gray-500
           "
         >
