@@ -76,12 +76,12 @@ const Tesseracts: React.FC = () => {
           <h2>Text language in the pictures:</h2>
           <select
             className="bg-transparent cursor-pointer"
+            defaultValue={DEFAULT_LANGUAGE}
             onChange={onSelectLanguageHandler}
           >
             {Object.entries(Languages).map(([key, value]) => (
               <option
                 key={key}
-                selected={key === DEFAULT_LANGUAGE}
                 value={key}
               >
                 {value}
