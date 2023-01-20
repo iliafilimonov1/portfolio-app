@@ -1,3 +1,7 @@
+/* Функция возвращает строку уникальных классов
+ * (отсеивает null, false, undefined, '', лишние пробелы и \n)
+ * Шаблонные выражения обязательно следует писать после логического оператора '&&' либо тернарника
+ */
 export function extractStyles(
   strings: TemplateStringsArray,
   ...exprResults: (string | boolean | undefined)[]

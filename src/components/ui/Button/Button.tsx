@@ -6,9 +6,7 @@ export type IconPositions = 'left' | 'right';
 
 export interface ButtonProps {
   children?: React.ReactNode;
-  fullWidth?: boolean;
-  size: 'sm' | 'md' | 'lg';
-  variant?: 'primary' | 'secondary' | 'success' | 'negative' | 'clear';
+  className?: string;
   onClick?: () => void;
   icon?: React.ReactNode;
   disabled?: boolean;
@@ -17,20 +15,16 @@ export interface ButtonProps {
 
 const Button: React.FC<ButtonProps> = ({
   children,
-  size = 'md',
   onClick,
   icon,
   disabled,
   iconPosition,
-  fullWidth,
-  variant = 'clear',
+  className,
 }) => (
   <button
     className={extractStyles`
-      rounded-md flex items-center justify-center
-      ${size === 'md' ? 'px-4 py-2' : 'px-2 py-1'}
-      ${variant === 'primary' && 'bg-blue-300'}
-      ${fullWidth && 'w-full'}
+      flex items-center justify-center
+      ${className}
     `}
     disabled={disabled}
     onClick={onClick}

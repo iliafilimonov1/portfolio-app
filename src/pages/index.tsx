@@ -18,7 +18,9 @@ const Home = () => (
         rel="icon"
       />
     </Head>
-    <div className="min-h-screen bg-blue-300" />
+    <div className="bg-pink-200">
+      content
+    </div>
   </div>
 );
 
