@@ -128,5 +128,6 @@ module.exports = {
     'no-plusplus': 'off',
     '@typescript-eslint/member-delimiter-style': ['error'
     ],
+    'no-param-reassign': ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }]
   },
 };
