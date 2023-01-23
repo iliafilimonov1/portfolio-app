@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import { Loader } from '@/components/ui/Loader/Loader';
 import LoadFile from '@/components/ui/LoadFile/LoadFile';
 import { extractStyles } from '@/services/utils';
 import { Languages } from '@/types';
@@ -104,7 +105,7 @@ const Tesseracts: React.FC = () => {
           <div className="text-center font-bold mb-2">Result</div>
           {canShowProgress && <div>{`${progress.toFixed()}%`}</div>}
           {!canShowProgress && recognizedText}
-          {canShowProgress && <div className="animate-spin h-10 w-10 border-2 rounded-full border-b-gray-400" /> }
+          {canShowProgress && <Loader /> }
         </div>
       </div>
       <button

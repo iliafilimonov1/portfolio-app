@@ -10,6 +10,7 @@ const navItems: NavItem[] = [
   { label: 'Home', link: '/' },
   { label: 'Tesseract', link: '/Tesseract' },
   { label: 'Framer-motion', link: '/FramerMotion' },
+  { label: 'RTKQuery', link: '/RTKQuery' },
 ];
 
 const Navigation: React.FC = () => {
