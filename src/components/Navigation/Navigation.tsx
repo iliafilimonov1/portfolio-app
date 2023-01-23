@@ -1,8 +1,9 @@
 import { NAVIGATION_SIZE } from '@/projectParams';
 import { extractStyles } from '@/services/utils';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useState } from 'react';
 import Button from '../ui/Button/Button';
+import Drawer from '../ui/Drawer/Drawer';
 
 type NavItem = { label: string; link: string; subItem?: string[] };
 
@@ -15,6 +16,8 @@ const navItems: NavItem[] = [
 const Navigation: React.FC = () => {
   const router = useRouter();
 
+  const [isDrawerOpen, setDrawerOpen] = useState(false);
+
   return (
     <div className={
       extractStyles`
@@ -24,16 +27,32 @@ const Navigation: React.FC = () => {
       `
     }
     >
-      {navItems.map((item) => (
-        <div key={item.link}>
-          <Button
-            className="text-gray-700 hover:text-gray-500 px-4 p-2 rounded-sm transition-all tracking-wider text-xl"
-            onClick={() => router.push(item.link)}
-          >
-            {item.label}
-          </Button>
-        </div>
-      ))}
+      <button
+        onClick={() => setDrawerOpen(true)}
+        type="button"
+      >
+
+        Open drawer
+      </button>
+
+      <Drawer
+        isOpen={isDrawerOpen}
+        setIsOpen={(value: boolean) => setDrawerOpen(value)}
+      >
+        asdasda
+      </Drawer>
+      {
+        navItems.map((item) => (
+          <div key={item.link}>
+            <Button
+              className="text-gray-700 hover:text-gray-500 px-4 p-2 rounded-sm transition-all tracking-wider text-xl"
+              onClick={() => router.push(item.link)}
+            >
+              {item.label}
+            </Button>
+          </div>
+        ))
+      }
     </div>
   );
 };
