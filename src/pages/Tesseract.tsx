@@ -22,7 +22,11 @@ const Tesseracts: React.FC = () => {
 
   /** Обработчик прогресса в процентах */
   const setProgressHandler = (progressNumber: number | undefined) => {
-    if (progressNumber) { setProgress(progressNumber * 100); } else { setProgress(undefined); }
+    if (progressNumber) {
+      setProgress(progressNumber * 100);
+    } else {
+      setProgress(undefined);
+    }
   };
 
   /** Функция для работы с tesseract */
@@ -103,8 +107,8 @@ const Tesseracts: React.FC = () => {
         >
           <div className="text-center font-bold mb-2">Result</div>
           {canShowProgress && <div>{`${progress.toFixed()}%`}</div>}
-          {!canShowProgress && recognizedText}
-          {canShowProgress && <div className="animate-spin h-10 w-10 border-2 rounded-full border-b-gray-400" /> }
+          {recognizedText}
+          {canShowProgress && <div className="animate-spin h-10 w-10 border-2 rounded-full border-b-gray-400" />}
         </div>
       </div>
       <button
