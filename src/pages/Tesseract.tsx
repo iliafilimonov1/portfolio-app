@@ -5,6 +5,7 @@ import { extractStyles } from '@/services/utils';
 import { Languages } from '@/types';
 import React, { useState } from 'react';
 import { createWorker } from 'tesseract.js';
+import Dropzone from '../components/ui/Dropzone/Dropzone';
 
 const DEFAULT_LANGUAGE = 'eng';
 
@@ -92,7 +93,8 @@ const Tesseracts: React.FC = () => {
         </div>
       </div>
       <div className="flex gap-4 justify-between w-full flex-col md:flex-row">
-        <LoadFile
+        <Dropzone onDrop={(acceptedFiles) => console.log(acceptedFiles)} />
+        {/* <LoadFile
           callBack={recognize}
           previewFileUrl={selectedImage}
         />
@@ -105,8 +107,8 @@ const Tesseracts: React.FC = () => {
           <div className="text-center font-bold mb-2">Result</div>
           {canShowProgress && <div>{`${progress.toFixed()}%`}</div>}
           {!canShowProgress && recognizedText}
-          {canShowProgress && <Loader /> }
-        </div>
+          {canShowProgress && <Loader />}
+        </div> */}
       </div>
       <button
         className={
