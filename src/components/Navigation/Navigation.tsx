@@ -9,6 +9,7 @@ type NavItem = { label: string; link: string; subItem?: string[] };
 
 const navItems: NavItem[] = [
   { label: 'Home', link: '/' },
+  { label: 'Walnut Page', link: '/Walnut' },
   { label: 'Tesseract', link: '/Tesseract' },
   { label: 'Framer-motion', link: '/FramerMotion' },
   { label: 'RTKQuery', link: '/RTKQuery' },

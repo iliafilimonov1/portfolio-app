@@ -1,10 +1,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { Loader } from '@/components/ui/Loader/Loader';
 import LoadFile from '@/components/ui/LoadFile/LoadFile';
+import WalnutUpload from '@/components/WalnutComponents/WalnutUpload';
 import { extractStyles } from '@/services/utils';
 import { Languages } from '@/types';
 import React, { useState } from 'react';
 import { createWorker } from 'tesseract.js';
+// import Dropzone from '../components/ui/Dropzone/Dropzone';
 
 const DEFAULT_LANGUAGE = 'eng';
 
@@ -105,7 +107,7 @@ const Tesseracts: React.FC = () => {
           <div className="text-center font-bold mb-2">Result</div>
           {canShowProgress && <div>{`${progress.toFixed()}%`}</div>}
           {!canShowProgress && recognizedText}
-          {canShowProgress && <Loader /> }
+          {canShowProgress && <Loader />}
         </div>
       </div>
       <button
