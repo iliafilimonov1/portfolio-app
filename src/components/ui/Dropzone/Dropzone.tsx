@@ -1,20 +1,20 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useDropzone } from 'react-dropzone';
 
-const Dropzone: React.FC<{ onDrop: (value: File[]) => void }> = () => {
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    onDrop(acceptedFiles);
-  }, []);
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+const Dropzone: React.FC<{
+  onDrop: (value: File[]) => void;
+  children: React.ReactNode;
+}> = ({ onDrop, children }) => {
+  const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   return (
-    <div {...getRootProps()}>
+    <div
+      className="bg-cyan-900 h-min"
+      {...getRootProps()}
+    >
       <input {...getInputProps()} />
-      {
-        isDragActive
-          ? <p>Drop the files here ...</p>
-          : <p>Drag 'n' drop some files here, or click to select files</p>
-      }
+      {children}
+
     </div>
   );
 };
