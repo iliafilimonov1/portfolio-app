@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { Loader } from '@/components/ui/Loader/Loader';
 import LoadFile from '@/components/ui/LoadFile/LoadFile';
+import WalnutUpload from '@/components/WalnutComponents/WalnutUpload';
 import { extractStyles } from '@/services/utils';
 import { Languages } from '@/types';
 import React, { useState } from 'react';
 import { createWorker } from 'tesseract.js';
-import Dropzone from '../components/ui/Dropzone/Dropzone';
+// import Dropzone from '../components/ui/Dropzone/Dropzone';
 
 const DEFAULT_LANGUAGE = 'eng';
 
@@ -93,8 +94,7 @@ const Tesseracts: React.FC = () => {
         </div>
       </div>
       <div className="flex gap-4 justify-between w-full flex-col md:flex-row">
-        <Dropzone onDrop={(acceptedFiles) => console.log(acceptedFiles)} />
-        {/* <LoadFile
+        <LoadFile
           callBack={recognize}
           previewFileUrl={selectedImage}
         />
@@ -108,7 +108,7 @@ const Tesseracts: React.FC = () => {
           {canShowProgress && <div>{`${progress.toFixed()}%`}</div>}
           {!canShowProgress && recognizedText}
           {canShowProgress && <Loader />}
-        </div> */}
+        </div>
       </div>
       <button
         className={
