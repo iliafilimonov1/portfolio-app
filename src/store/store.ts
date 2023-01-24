@@ -1,15 +1,19 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import { nasaApi } from './Nasa/nasaApi';
 import countReducer from './reducers/CountSlice';
 import { usersApi } from './usersApi';
 
 const rootReducer = combineReducers({
   countReducer,
   [usersApi.reducerPath]: usersApi.reducer,
+  [nasaApi.reducerPath]: nasaApi.reducer,
 });
 
 export const setupStore = () => configureStore({
   reducer: rootReducer,
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(usersApi.middleware),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware()
+    .concat(usersApi.middleware)
+    .concat(nasaApi.middleware),
 });
 
 export type RootState = ReturnType<typeof rootReducer>;

@@ -12,8 +12,8 @@ const navItems: NavItem[] = [
   { label: 'Tesseract', link: '/Tesseract' },
   { label: 'Framer-motion', link: '/FramerMotion' },
   { label: 'RTKQuery', link: '/RTKQuery' },
+  { label: 'NASAApi', link: '/NasaApi' },
 ];
-
 const Navigation: React.FC = () => {
   const router = useRouter();
 
@@ -32,10 +32,8 @@ const Navigation: React.FC = () => {
         onClick={() => setDrawerOpen(true)}
         type="button"
       >
-
         Open drawer
       </button>
-
       <Drawer
         isOpen={isDrawerOpen}
         setIsOpen={(value: boolean) => setDrawerOpen(value)}
