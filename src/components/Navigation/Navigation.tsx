@@ -14,6 +14,7 @@ const navItems: NavItem[] = [
   { label: 'Framer-motion', link: '/FramerMotion' },
   { label: 'RTKQuery', link: '/RTKQuery' },
   { label: 'NASAApi', link: '/NasaApi' },
+  { label: 'History', link: '/History' },
 ];
 const Navigation: React.FC = () => {
   const router = useRouter();
