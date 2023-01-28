@@ -15,12 +15,11 @@ interface WalnutPreviewfileProps {
 
 const WalnutPreviewFile: React.FC<WalnutPreviewfileProps> = ({ file, fileName, fileSize }) => {
   const newplugin = defaultLayoutPlugin();
-  console.log('previewComponent', fileSize, file, fileName);
   return (
     (
       <div className="bg-slate-50">
 
-        <div className="w-full h-screen d-flex bg-slate-400">
+        <div className="w-full h-screen flex justify-between bg-slate-400">
           <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.15.349/build/pdf.worker.min.js">
             {file && (
               <div className="w-[75vw] h-[80vh] overflow-hidden">
@@ -28,17 +27,14 @@ const WalnutPreviewFile: React.FC<WalnutPreviewfileProps> = ({ file, fileName, f
                   fileUrl={file}
                   plugins={[newplugin as Plugin]}
                 />
-
-                <div>
-                  <div>{fileName}</div>
-                  <div>{fileSize}</div>
-
-                </div>
               </div>
-
             )}
 
           </Worker>
+          <div className="w-20 h-20 bg-slate-500">
+            <div>{fileName}</div>
+            <div>{fileSize}</div>
+          </div>
         </div>
       </div>
     )

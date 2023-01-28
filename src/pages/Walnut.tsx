@@ -3,6 +3,8 @@ import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import WalnutUpload from '@/components/WalnutComponents/WalnutUpload';
 import WalnutPreviewFile from '@/components/WalnutComponents/WalnutPreviewFile';
 import { imageSlice } from '@/store/imagestore/ImageSlice';
+import CropImage from '@/components/CropImage/CropImage';
+import PdfToJpegConverter from '@/components/PdfToJpegConverter/PdfToJpegConverter';
 
 const Walnut = () => {
   const { file, imageName, imageSize } = useAppSelector((state) => state.imageReducer);
@@ -36,6 +38,10 @@ const Walnut = () => {
   };
   return (
     <div className="flex flex-col">
+      <div className="bg-slate-500">
+        <PdfToJpegConverter />
+      </div>
+
       <div className="bg-slate-400">
         <WalnutUpload onDrop={changeHandler} />
         {error && <div>Необходим файл PDF</div>}
@@ -47,6 +53,10 @@ const Walnut = () => {
           fileName={imageName ?? ''}
           fileSize={imageSize ?? ''}
         />
+      </div>
+
+      <div>
+        <CropImage file={file} />
       </div>
     </div>
   );
