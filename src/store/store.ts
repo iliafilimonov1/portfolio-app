@@ -1,10 +1,12 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import imageReducer from './imagestore/ImageSlice';
 import { nasaApi } from './Nasa/nasaApi';
 import countReducer from './reducers/CountSlice';
 import { usersApi } from './usersApi';
 
 const rootReducer = combineReducers({
   countReducer,
+  imageReducer,
   [usersApi.reducerPath]: usersApi.reducer,
   [nasaApi.reducerPath]: nasaApi.reducer,
 });
