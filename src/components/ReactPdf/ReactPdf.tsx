@@ -6,11 +6,12 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
 interface PDFDocument {
   numPages?: number;
   data?: string | ArrayBuffer;
+  onConvert: (pdfFile: File) => Promise<void>;
 }
 
-const ReactPdf: React.FC<{ document?: string }> = ({ document }) => {
-  const [file, setFile] = useState<string | undefined>(document);
-  const [pdfData, setPdfData] = useState<PDFDocument | null>(null);
+const ReactPdf: React.FC<{ data?: string }> = ({ data, onConvert }) => {
+  const [file, setFile] = useState<string | undefined>(data);
+  const [numPages, setNumPages] = useState<number | null>(null);
 
   // Хэндлер загрузки файла
   const handleDocumentLoad = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,10 +22,9 @@ const ReactPdf: React.FC<{ document?: string }> = ({ document }) => {
   };
 
   const onLoadSuccess = (pdfDocument: PDFDocument) => {
-    if (!pdfDocument) {
-      return;
+    if (pdfDocument && pdfDocument.numPages) {
+      setNumPages(pdfDocument.numPages);
     }
-    setPdfData(pdfDocument);
   };
 
   return (
@@ -41,7 +41,7 @@ const ReactPdf: React.FC<{ document?: string }> = ({ document }) => {
           <Page pageNumber={1} />
         </Document>
       )}
-      {pdfData && <p>{pdfData.numPages}</p>}
+      {numPages && <p>{numPages}</p>}
     </div>
   );
 };
