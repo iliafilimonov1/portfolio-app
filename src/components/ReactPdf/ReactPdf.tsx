@@ -6,7 +6,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
 interface PDFDocument {
   numPages?: number;
   data?: string | ArrayBuffer;
-  onConvert: (pdfFile: File) => Promise<void>;
+  onConvert?: (pdfFile: File) => Promise<void>;
 }
 
 const ReactPdf: React.FC<{ data?: string }> = ({ data, onConvert }) => {
