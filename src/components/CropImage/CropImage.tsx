@@ -1,22 +1,15 @@
 import React, { useState } from 'react';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
+import Button from '../ui/Button/Button';
 
 const CropImage: React.FC<{ file?: string }> = ({ file }) => {
-  const [src, selectFile] = useState<string | undefined>(file);
-  console.log('asdas', file);
-
+  /** Стэйты необходимые для работы ReactCrop */
   const [image, setImage] = useState<HTMLImageElement>();
-
   const [crop, setCrop] = useState<ReactCrop.Crop>({ aspect: 16 / 9 });
+  const [croppedImage, setCroppedImage] = useState<string>();
 
-  const [result, setResult] = useState<string>();
-
-  const changeHandle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const urlFile = e.target.files ? URL.createObjectURL(e.target.files[0]) : undefined;
-    selectFile(urlFile);
-  };
-
+  /** Функция для обрезки */
   function getCroppedImg() {
     if (!image) {
       return;
@@ -24,6 +17,7 @@ const CropImage: React.FC<{ file?: string }> = ({ file }) => {
     const canvas = document.createElement('canvas');
     const scaleX = image.naturalWidth / image.width;
     const scaleY = image.naturalHeight / image.height;
+    image.crossOrigin = 'Anonymous';
     canvas.width = crop.width ?? 0;
     canvas.height = crop.height ?? 0;
     const ctx = canvas.getContext('2d');
@@ -42,52 +36,36 @@ const CropImage: React.FC<{ file?: string }> = ({ file }) => {
 
     canvas.toBlob(() => {
       const base64Image = canvas.toDataURL('image/jpeg');
-      setResult(base64Image);
+      setCroppedImage(base64Image);
     });
   }
 
   return (
-    <div className="container">
-      <div className="left">
-        <input
-          accept="image/*"
-          onChange={changeHandle}
-          type="file"
-        />
-      </div>
-
+    <div className="w-full">
       <div className="right">
-        {
-          src && (
-            <>
-              <div>asda</div>
-              <ReactCrop
-                crop={crop}
-                onChange={
-                  (cropObj: ReactCrop.Crop) => setCrop(cropObj)
-                }
-                onImageLoaded={(e) => setImage(e)}
-                src={src}
-              />
-              <button
-                onClick={getCroppedImg}
-                type="submit"
-              >
-                Crop image
-              </button>
-            </>
-          )
-        }
-        {
-          result && (
-            <p>
-              <img
-                alt="asd"
-                src={result}
-              />
-            </p>
-          )
-        }
+        {file && (
+          <div className="flex flex-col">
+            <ReactCrop
+              crop={crop}
+              onChange={setCrop}
+              onImageLoaded={setImage}
+              src={file}
+            />
+            <Button
+              className="rounded-none"
+              onClick={() => getCroppedImg()}
+              variant="primary"
+            >
+              CROP
+            </Button>
+          </div>
+        )}
+        {croppedImage && (
+          <img
+            alt="asd"
+            src={croppedImage}
+          />
+        )}
       </div>
     </div>
   );

@@ -36,7 +36,6 @@ const WalnutUpload: React.FC<WalnutUploadProps> = ({ onDrop }) => (
         </span>
       </div>
     </Dropzone>
-
   </div>
 );
 
