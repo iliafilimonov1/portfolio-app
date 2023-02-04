@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Document, Page, pdfjs } from 'react-pdf';
+import { pdfjs } from 'react-pdf';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
@@ -11,7 +11,7 @@ interface PDFDocument {
 
 const ReactPdf: React.FC<{ data?: string }> = ({ data, onConvert }) => {
   const [file, setFile] = useState<string | undefined>(data);
-  const [numPages, setNumPages] = useState<number | null>(null);
+  const [pdfDataUrl, setPdfDataUrl] = useState<string | undefined>(undefined);
 
   // Хэндлер загрузки файла
   const handleDocumentLoad = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -21,9 +21,21 @@ const ReactPdf: React.FC<{ data?: string }> = ({ data, onConvert }) => {
     }
   };
 
-  const onLoadSuccess = (pdfDocument: PDFDocument) => {
-    if (pdfDocument && pdfDocument.numPages) {
-      setNumPages(pdfDocument.numPages);
+  const handleConvertClick = async (file: string) => {
+    try {
+      const pdf = await pdfjs.getDocument(file).promise;
+      const page = await pdf.getPage(1);
+      const viewport = page.getViewport({ scale: 1 });
+      const canvas = document.createElement('canvas');
+      const context = canvas.getContext('2d');
+      canvas.height = viewport.height;
+      canvas.width = viewport.width;
+      await page.render({ canvasContext: context as CanvasRenderingContext2D, viewport }).promise;
+      const imgData = canvas.toDataURL('image/jpeg');
+      setPdfDataUrl(imgData);
+    } catch (error) {
+      console.error(error);
+      alert('An error occurred while converting the PDF to JPEG');
     }
   };
 
@@ -34,14 +46,19 @@ const ReactPdf: React.FC<{ data?: string }> = ({ data, onConvert }) => {
         type="file"
       />
       {file && (
-        <Document
-          file={file}
-          onLoadSuccess={onLoadSuccess}
+        <button
+          onClick={() => handleConvertClick(file)}
+          type="button"
         >
-          <Page pageNumber={1} />
-        </Document>
+          Convert
+        </button>
       )}
-      {numPages && <p>{numPages}</p>}
+      {pdfDataUrl && (
+        <img
+          alt="some text"
+          src={pdfDataUrl}
+        />
+      )}
     </div>
   );
 };
