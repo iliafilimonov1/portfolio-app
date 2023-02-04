@@ -10,8 +10,9 @@
 /coverage
 
 # next.js
-/frontend/.next/
+frontend/.next/
 /frontend/out/
+/frontend/public/
 
 # production
 /frontent/build
