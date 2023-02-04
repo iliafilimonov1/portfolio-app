@@ -15,11 +15,6 @@
   ],
   "rootMainFiles": [],
   "pages": {
-    "/NasaApi": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/NasaApi.js"
-    ],
     "/Walnut": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
