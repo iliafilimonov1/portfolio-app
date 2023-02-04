@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "command":"npm run dev",
+      "command":"cd frontend && npm run dev",
       "type": "node-terminal",
       "request": "launch",
       "name": "Launch Project",
