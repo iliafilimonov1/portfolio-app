@@ -41,11 +41,7 @@ const PdfToJpegConverter: React.FC<PdfToJpegConverterProps> = () => {
 
   return (
     <>
-      <input
-        accept=".pdf"
-        onChange={handlePdfChange}
-        type="file"
-      />
+      
       <button
         onClick={handleConvertClick}
         type="submit"

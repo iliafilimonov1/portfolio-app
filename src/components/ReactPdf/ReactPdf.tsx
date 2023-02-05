@@ -3,23 +3,14 @@ import { pdfjs } from 'react-pdf';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
-interface PDFDocument {
-  numPages?: number;
-  data?: string | ArrayBuffer;
-  onConvert?: (pdfFile: File) => Promise<void>;
-}
+// interface PDFDocument {
+//   numPages?: number;
+//   fileUrl?: string | ArrayBuffer;
+//   // onConvert?: (pdfFile: File) => Promise<void>;
+// }
 
-const ReactPdf: React.FC<{ data?: string }> = ({ data, onConvert }) => {
-  const [file, setFile] = useState<string | undefined>(data);
+const ReactPdf: React.FC<{ fileUrl?: string }> = ({ fileUrl }) => {
   const [pdfDataUrl, setPdfDataUrl] = useState<string | undefined>(undefined);
-
-  // Хэндлер загрузки файла
-  const handleDocumentLoad = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target && event.target.files) {
-      const objectUrl = URL.createObjectURL(event?.target.files[0]);
-      setFile(objectUrl);
-    }
-  };
 
   const handleConvertClick = async (file: string) => {
     try {
@@ -41,13 +32,9 @@ const ReactPdf: React.FC<{ data?: string }> = ({ data, onConvert }) => {
 
   return (
     <div className="w-60 h-20 bg-slate-500">
-      <input
-        onChange={handleDocumentLoad}
-        type="file"
-      />
-      {file && (
+      {fileUrl && (
         <button
-          onClick={() => handleConvertClick(file)}
+          onClick={() => handleConvertClick(fileUrl)}
           type="button"
         >
           Convert

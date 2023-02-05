@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
-import WalnutUpload from '@/components/WalnutComponents/WalnutUpload';
-import WalnutPreviewFile from '@/components/WalnutComponents/WalnutPreviewFile';
+import WalnutPreviewFile from '@/components/PreviewFile/PreviewFile';
 import { imageSlice } from '@/store/imagestore/ImageSlice';
 import CropImage from '@/components/CropImage/CropImage';
 import PdfToJpegConverter from '@/components/PdfToJpegConverter/PdfToJpegConverter';
+import Dropzone from '@/components/ui/Dropzone/Dropzone';
 
-const Walnut = () => {
+const ImagesConverter = () => {
   const { file, imageName, imageSize } = useAppSelector((state) => state.imageReducer);
   const { change } = imageSlice.actions;
   const dispatch = useAppDispatch();
@@ -43,7 +43,7 @@ const Walnut = () => {
       </div>
 
       <div className="bg-slate-400">
-        <WalnutUpload onDrop={changeHandler} />
+        <Dropzone onDrop={changeHandler} />
         {error && <div>Необходим файл PDF</div>}
       </div>
 
@@ -62,4 +62,4 @@ const Walnut = () => {
   );
 };
 
-export default Walnut;
+export default ImagesConverter;
