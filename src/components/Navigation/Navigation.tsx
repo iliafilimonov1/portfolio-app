@@ -1,25 +1,25 @@
 import { NAVIGATION_SIZE } from '@/projectParams';
 import { extractStyles } from '@/services/utils';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React from 'react';
 import Button from '../ui/Button/Button';
-import Drawer from '../ui/Drawer/Drawer';
+// import Drawer from '../ui/Drawer/Drawer';
 
 type NavItem = { label: string; link: string; subItem?: string[] };
 
 const navItems: NavItem[] = [
   { label: 'Home', link: '/' },
-  { label: 'Walnut Page', link: '/Walnut' },
+  { label: 'ReactPdfPage', link: '/ReactPdfPage' },
   { label: 'Tesseract', link: '/Tesseract' },
   { label: 'Framer-motion', link: '/FramerMotion' },
-  { label: 'RTKQuery', link: '/RTKQuery' },
-  { label: 'NASAApi', link: '/NasaApi' },
-  { label: 'History', link: '/History' },
+  // { label: 'RTKQuery', link: '/RTKQuery' },
+  // { label: 'NASAApi', link: '/NasaApi' },
+  // { label: 'History', link: '/History' },
 ];
 const Navigation: React.FC = () => {
   const router = useRouter();
 
-  const [isDrawerOpen, setDrawerOpen] = useState(false);
+  // const [isDrawerOpen, setDrawerOpen] = useState(false);
 
   return (
     <div className={
@@ -30,7 +30,7 @@ const Navigation: React.FC = () => {
       `
     }
     >
-      <button
+      {/* <button
         onClick={() => setDrawerOpen(true)}
         type="button"
       >
@@ -41,7 +41,7 @@ const Navigation: React.FC = () => {
         setIsOpen={(value: boolean) => setDrawerOpen(value)}
       >
         asdasda
-      </Drawer>
+      </Drawer> */}
       {
         navItems.map((item) => (
           <div key={item.link}>

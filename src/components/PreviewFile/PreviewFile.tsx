@@ -20,7 +20,7 @@ const WalnutPreviewFile: React.FC<WalnutPreviewfileProps> = ({ file, fileName, f
       <div className="bg-slate-50">
 
         <div className="w-full h-screen flex justify-between bg-slate-400">
-          <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.15.349/build/pdf.worker.min.js">
+          <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.3.122/build/pdf.worker.min.js">
             {file && (
               <div className="w-[75vw] h-[80vh] overflow-hidden">
                 <Viewer

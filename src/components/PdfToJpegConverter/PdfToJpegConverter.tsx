@@ -5,7 +5,7 @@ interface PdfToJpegConverterProps { }
 
 const PdfToJpegConverter: React.FC<PdfToJpegConverterProps> = () => {
   const [pdfFile, setPdfFile] = React.useState<File | null>(null);
-  const [jpegUrl, setJpegUrl] = React.useState<string | null>(null);
+  const [imageInJpeg, setImageInJpeg] = React.useState<string | null>(null);
 
   const handlePdfChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -30,7 +30,7 @@ const PdfToJpegConverter: React.FC<PdfToJpegConverterProps> = () => {
         canvas.width = viewport.width;
         await page.render({ canvasContext: context, viewport }).promise;
         const imgData = canvas.toDataURL('image/jpeg');
-        setJpegUrl(imgData);
+        setImageInJpeg(imgData);
       } catch (error) {
         console.error(error);
         alert('An error occurred while converting the PDF to JPEG');
@@ -41,21 +41,17 @@ const PdfToJpegConverter: React.FC<PdfToJpegConverterProps> = () => {
 
   return (
     <>
-      <input
-        accept=".pdf"
-        onChange={handlePdfChange}
-        type="file"
-      />
+      
       <button
         onClick={handleConvertClick}
         type="submit"
       >
         Convert to JPEG
       </button>
-      {jpegUrl && (
+      {imageInJpeg && (
         <img
           alt="Converted JPEG"
-          src={jpegUrl}
+          src={imageInJpeg}
         />
       )}
     </>
