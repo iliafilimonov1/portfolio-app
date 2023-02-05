@@ -7,13 +7,13 @@ import { Viewer, Worker, Plugin } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 
-interface WalnutPreviewfileProps {
+interface PreviewfileProps {
   file: string;
   fileName: string;
   fileSize: string;
 }
 
-const WalnutPreviewFile: React.FC<WalnutPreviewfileProps> = ({ file, fileName, fileSize }) => {
+const PreviewFile: React.FC<PreviewfileProps> = ({ file, fileName, fileSize }) => {
   const newplugin = defaultLayoutPlugin();
   return (
     (
@@ -41,4 +41,4 @@ const WalnutPreviewFile: React.FC<WalnutPreviewfileProps> = ({ file, fileName, f
   );
 };
 
-export default WalnutPreviewFile;
+export default PreviewFile;

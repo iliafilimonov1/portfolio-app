@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 
 const CropImage: React.FC<{ file?: string }> = ({ file }) => {
   const [src, selectFile] = useState<string | undefined>(file);
-  console.log('asdas', file);
+
+  console.log('file', file);
 
   const [image, setImage] = useState<HTMLImageElement>();
 
@@ -16,6 +17,10 @@ const CropImage: React.FC<{ file?: string }> = ({ file }) => {
     const urlFile = e.target.files ? URL.createObjectURL(e.target.files[0]) : undefined;
     selectFile(urlFile);
   };
+
+  useEffect(() => {
+    selectFile(file);
+  }, [file]);
 
   function getCroppedImg() {
     if (!image) {
@@ -60,7 +65,6 @@ const CropImage: React.FC<{ file?: string }> = ({ file }) => {
         {
           src && (
             <>
-              <div>asda</div>
               <ReactCrop
                 crop={crop}
                 onChange={

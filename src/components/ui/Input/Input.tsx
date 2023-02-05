@@ -23,7 +23,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
 }, ref) => {
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value: val } = e.target;
-    // console.log(isValidForType(type, value ?? ''));
     if (onChange) {
       onChange(val);
     }

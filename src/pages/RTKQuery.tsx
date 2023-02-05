@@ -1,4 +1,4 @@
-import { Loader } from '@/components/ui/Loader/Loader';
+import { Spinner } from '@/components/ui/Spinner/Spinner';
 import { useGetUsersQuery } from '@/store/usersApi';
 import React from 'react';
 
@@ -7,7 +7,7 @@ const RTKQuery: React.FC = () => {
 
   return (
     <div className="grid grid-cols-3 gap-4 p-4">
-      {isLoading && <Loader />}
+      {isLoading && <Spinner />}
       {!!users?.length && users.map(({
         address, company, email, id, name, phone, website,
       }) => (

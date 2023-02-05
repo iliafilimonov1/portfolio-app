@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import WalnutPreviewFile from '@/components/PreviewFile/PreviewFile';
 import { imageSlice } from '@/store/imagestore/ImageSlice';
 import CropImage from '@/components/CropImage/CropImage';
-import PdfToJpegConverter from '@/components/PdfToJpegConverter/PdfToJpegConverter';
 import Dropzone from '@/components/ui/Dropzone/Dropzone';
 
 const ImagesConverter = () => {
@@ -38,10 +37,6 @@ const ImagesConverter = () => {
   };
   return (
     <div className="flex flex-col">
-      <div className="bg-slate-500">
-        <PdfToJpegConverter />
-      </div>
-
       <div className="bg-slate-400">
         <Dropzone onDrop={changeHandler} />
         {error && <div>Необходим файл PDF</div>}
