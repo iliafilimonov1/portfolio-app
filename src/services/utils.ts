@@ -1,3 +1,13 @@
+import { ClassValue, clsx } from 'clsx';
+import { twMerge } from 'tailwind-merge';
+
+/* Функция принимает массив классов,
+ * объединяет их с помощью clsx и сопоставляет полученные имена классов с классами Tailwind
+ */
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs));
+}
+
 /* Функция возвращает строку уникальных классов
  * (отсеивает null, false, undefined, '', лишние пробелы и \n)
  * Шаблонные выражения обязательно следует писать после логического оператора '&&' либо тернарника
