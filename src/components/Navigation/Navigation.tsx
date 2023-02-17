@@ -1,7 +1,6 @@
-import { NAVIGATION_SIZE } from '@/projectParams';
-import { extractStyles } from '@/services/utils';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { Globe, User } from 'lucide-react';
 import Button from '../ui/Button/Button';
 
 type NavItem = { label: string; link: string; subItem?: string[] };
@@ -19,26 +18,32 @@ const Navigation: React.FC = () => {
   const router = useRouter();
 
   return (
-    <header className={
-      extractStyles`
-        px-6 flex flex-wrap sticky top-0 left-0 right-0 z-[9999]
-         bg-slate-100 items-center shadow-lg
-        ${NAVIGATION_SIZE && `min-h-[${NAVIGATION_SIZE}px]`}
-      `
-    }
-    >
-      {
-        navItems.map((item) => (
-          <nav key={item.link}>
+    <header className="shadow bg-white h-16 mx-auto px-5 flex items-center justify-between">
+      <a
+        className="text-2xl hover:text-cyan-500 transition-colors cursor-pointer"
+        href="https://www.airbnb.com/"
+      >
+        Logo
+      </a>
+      <nav className="flex items-center gap-5">
+        {
+          navItems.map((item) => (
             <Button
+              key={item.link}
               onClick={() => router.push(item.link)}
               variant="ghost"
             >
               {item.label}
             </Button>
-          </nav>
-        ))
-      }
+          ))
+        }
+      </nav>
+
+      <div className="flex cursor-pointer">
+        <Globe />
+        <User />
+      </div>
+
     </header>
   );
 };
