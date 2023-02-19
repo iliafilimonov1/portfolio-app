@@ -18,7 +18,6 @@ const App = ({ Component, pageProps }: AppProps) => (
     <Provider store={store}>
       <MainLayout>
         <Component {...pageProps} />
-        asdasdasdasdasdasdasdads
       </MainLayout>
     </Provider>
   </main>

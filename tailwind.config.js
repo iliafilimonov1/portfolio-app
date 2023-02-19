@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+const plugin = require('tailwindcss/plugin')
 module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx}",
@@ -7,5 +8,12 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    plugin(function({addComponents}){
+      addComponents({
+        /** Базовые стили свитчера */
+        '.switcher': require('./src/components/ui/Switcher/switcher.config')
+      })
+    })
+  ],
 }
