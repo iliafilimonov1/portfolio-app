@@ -38,12 +38,10 @@ const Navigation: React.FC = () => {
           ))
         }
       </nav>
-
       <div className="flex cursor-pointer">
         <Globe />
         <User />
       </div>
-
     </header>
   );
 };

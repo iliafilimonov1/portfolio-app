@@ -20,6 +20,7 @@ const App = ({ Component, pageProps }: AppProps) => (
         <Component {...pageProps} />
       </MainLayout>
     </Provider>
+    <div id="modal" />
   </main>
 
 );

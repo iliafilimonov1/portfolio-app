@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 
+/** Компонент вырезания участка изображения */
 const CropImage: React.FC<{ file?: string }> = ({ file }) => {
   const [src, selectFile] = useState<string | undefined>(file);
-
-  console.log('file', file);
 
   const [image, setImage] = useState<HTMLImageElement>();
 
@@ -62,36 +61,32 @@ const CropImage: React.FC<{ file?: string }> = ({ file }) => {
       </div>
 
       <div className="right">
-        {
-          src && (
-            <>
-              <ReactCrop
-                crop={crop}
-                onChange={
-                  (cropObj: ReactCrop.Crop) => setCrop(cropObj)
-                }
-                onImageLoaded={(e) => setImage(e)}
-                src={src}
-              />
-              <button
-                onClick={getCroppedImg}
-                type="submit"
-              >
-                Crop image
-              </button>
-            </>
-          )
-        }
-        {
-          result && (
-            <p>
-              <img
-                alt="asd"
-                src={result}
-              />
-            </p>
-          )
-        }
+        {src && (
+          <>
+            <ReactCrop
+              crop={crop}
+              onChange={
+                (cropObj: ReactCrop.Crop) => setCrop(cropObj)
+              }
+              onImageLoaded={(e) => setImage(e)}
+              src={src}
+            />
+            <button
+              onClick={getCroppedImg}
+              type="submit"
+            >
+              Crop image
+            </button>
+          </>
+        )}
+        {result && (
+          <p>
+            <img
+              alt="asd"
+              src={result}
+            />
+          </p>
+        )}
       </div>
     </div>
   );
