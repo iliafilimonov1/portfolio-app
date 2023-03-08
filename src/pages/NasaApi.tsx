@@ -6,21 +6,19 @@ const NasaApi: React.FC = () => {
 
   return (
     <div className="p-4 grid grid-cols-4 gap-2">
-      {
-        !!data?.photos.length && data?.photos.map(({ img_src, id, earth_date }) => (
-          <div
-            key={id}
-            className="relative hover:scale-110 hover:z-50 transition-all "
-          >
-            <img
-              alt="ph"
-              className="w-[400px] h-[380px] rounded-lg"
-              src={img_src}
-            />
-            <div className="absolute z-10 text-white top-4 left-4">{earth_date}</div>
-          </div>
-        ))
-      }
+      {!!data?.photos.length && data?.photos.map(({ img_src, id, earth_date }) => (
+        <div
+          key={id}
+          className="relative hover:scale-110 hover:z-50 transition-all "
+        >
+          <img
+            alt="ph"
+            className="w-[400px] h-[380px] rounded-lg"
+            src={img_src}
+          />
+          <div className="absolute z-10 text-white top-4 left-4">{earth_date}</div>
+        </div>
+      ))}
     </div>
   );
 };
