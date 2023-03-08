@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+/** Пример анимаций */
 const pageAnimation = {
   hidden: {
     x: -100,
@@ -25,6 +26,7 @@ const textAnimation = {
   },
 };
 
+/** Пример использования библиотеки */
 const FramerMotion: React.FC = () => (
   <div>
     <motion.div
