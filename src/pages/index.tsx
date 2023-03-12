@@ -28,28 +28,24 @@ const Home = () => (
       >
         Default
       </Button>
-
       <Button
         size="sm"
         variant="destructive"
       >
         Destructive
       </Button>
-
       <Button
         size="sm"
         variant="outline"
       >
         Outline
       </Button>
-
       <Button
         size="sm"
         variant="subtle"
       >
         Subtle
       </Button>
-
       <Button
         size="sm"
         variant="ghost"
@@ -63,18 +59,15 @@ const Home = () => (
       >
         Link
       </Button>
-
       <Button disabled>
         Please wait
       </Button>
-
       <Button>
         <Mail className="mr-2 h-4 w-4" />
         Login with Email
       </Button>
 
     </div>
-    <Switcher />
   </div>
 );
 

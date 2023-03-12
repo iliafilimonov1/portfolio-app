@@ -1,6 +1,7 @@
 import { extractStyles } from '@/services/utils';
 import React, { useState } from 'react';
 
+/** Свитчер */
 const Switcher: React.FC = () => {
   const [active, setActive] = useState(false);
 
