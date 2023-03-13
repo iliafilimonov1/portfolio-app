@@ -2,7 +2,6 @@ import Button from '@/components/ui/Button/Button';
 import Head from 'next/head';
 import React from 'react';
 import { Mail } from 'lucide-react';
-import Switcher from '@/components/ui/Switcher/Switcher';
 
 const Home = () => (
   <div>
@@ -66,7 +65,6 @@ const Home = () => (
         <Mail className="mr-2 h-4 w-4" />
         Login with Email
       </Button>
-
     </div>
   </div>
 );
