@@ -1,16 +1,8 @@
+import { extractStyles } from '@/services/utils';
 import React, { forwardRef } from 'react';
+import { InputProps } from './types';
 
 export type InputTypes = 'text' | 'number';
-
-export interface InputProps {
-  id: string;
-  label?: string;
-  value?: string;
-  onChange: (value: string) => void;
-  onBlur: () => void;
-  placeholder: string;
-  onClick: () => void;
-}
 
 const Input = forwardRef<HTMLInputElement, InputProps>(({
   id,
@@ -20,6 +12,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
   onBlur,
   placeholder,
   onClick,
+  error,
+  postfix,
 }, ref) => {
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value: val } = e.target;
@@ -29,18 +23,41 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
   };
 
   return (
-    <div>
-      {label && <div>{label}</div>}
-      <input
-        ref={ref}
-        id={id}
-        onBlur={onBlur}
-        onChange={onChangeHandler}
-        onClick={onClick}
-        placeholder={placeholder}
-        type="text"
-        value={value || ''}
-      />
+    <div className="flex flex-col">
+      {label && (
+        <div className={
+          extractStyles`
+          pb-1
+          ${error && 'text-red-600'}
+        `
+        }
+        >
+          {label}
+        </div>
+      )}
+      <div className={
+        extractStyles`
+         input
+         ${error && 'border-red-600'}
+         ${error && 'text-red-600'}
+          `
+      }
+      >
+        <input
+          ref={ref}
+          className="outline-none flex-1"
+          id={id}
+          onBlur={onBlur}
+          onChange={onChangeHandler}
+          onClick={onClick}
+          placeholder={placeholder}
+          type="text"
+          value={value || ''}
+        />
+        {postfix && <div className="w-min h-full">{postfix}</div>}
+      </div>
+
+      {error && <div className="text-red-600 break-words text-xs pt-1">{error}</div>}
     </div>
 
   );
