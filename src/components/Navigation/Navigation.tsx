@@ -36,6 +36,12 @@ const Navigation: React.FC = () => {
             {item.label}
           </Button>
         ))}
+        <button
+          className="button"
+          type="button"
+        >
+          тест
+        </button>
       </nav>
       <div className="flex cursor-pointer">
         <Globe />
