@@ -27,9 +27,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
       {label && (
         <div className={
           extractStyles`
-          pb-1
-          ${error && 'text-red-600'}
-        `
+            pb-1
+            ${error && 'text-red-600'}
+          `
         }
         >
           {label}

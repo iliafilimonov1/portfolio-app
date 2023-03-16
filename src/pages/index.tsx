@@ -1,7 +1,8 @@
+/* eslint-disable max-len */
 import Button from '@/components/ui/Button/Button';
+import Box from '@/components/ui/Containers/Box/Box';
 import Head from 'next/head';
 import React from 'react';
-import { Mail } from 'lucide-react';
 
 const Home = () => (
   <div>
@@ -20,51 +21,25 @@ const Home = () => (
         rel="icon"
       />
     </Head>
-    <div className="d-flex">
-      <Button
-        size="sm"
-        variant="default"
-      >
-        Default
-      </Button>
-      <Button
-        size="sm"
-        variant="destructive"
-      >
-        Destructive
-      </Button>
-      <Button
-        size="sm"
-        variant="outline"
-      >
-        Outline
-      </Button>
-      <Button
-        size="sm"
-        variant="subtle"
-      >
-        Subtle
-      </Button>
-      <Button
-        size="sm"
-        variant="ghost"
-      >
-        Ghost
-      </Button>
+    <div className="px-6 py-10 grid grid-cols-2 gap-2">
+      {
+        Array(10).fill(1).map((_, i) => (
+          <Box
+            key={`${i.toString()}_`}
+            footer={<span>Какой-то футер</span>}
+            header="Заголовок"
+            headerButtons={(
+              <>
+                <Button variant="subtle">Кнопка</Button>
+                <Button variant="subtle">Кнопка</Button>
+              </>
+            )}
+          >
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, autem iste nobis magnam delectus laborum iure libero quasi tempore sapiente temporibus aliquam provident id odio animi et ducimus suscipit perferendis facere? Ullam error consectetur est sapiente. Nobis, nisi sed laborum mollitia ab quia reprehenderit. Illo dolores similique perspiciatis explicabo at eius expedita recusandae ipsa repellat quasi aut dolor a, unde tempora, itaque aperiam. Quia aut ullam et ipsam! Ex ea culpa nobis suscipit, voluptates magnam? Tempore sint veniam eum earum minus ab voluptatem eius illum aperiam, est fugiat animi porro delectus adipisci rem provident magni ducimus cupiditate vitae eaque eveniet.
+          </Box>
+        ))
+      }
 
-      <Button
-        size="sm"
-        variant="link"
-      >
-        Link
-      </Button>
-      <Button disabled>
-        Please wait
-      </Button>
-      <Button>
-        <Mail className="mr-2 h-4 w-4" />
-        Login with Email
-      </Button>
     </div>
   </div>
 );
