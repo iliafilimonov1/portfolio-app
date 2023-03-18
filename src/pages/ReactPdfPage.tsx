@@ -1,5 +1,5 @@
 import ReactPdf from '@/components/ReactPdf/ReactPdf';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import Dropzone from '@/components/ui/Dropzone/Dropzone';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { imageSlice } from '@/store/imagestore/ImageSlice';
@@ -14,12 +14,12 @@ const ReactPdfPage: React.FC<ReactPdfPageProps> = () => {
 
   const [cropImage, setCropImage] = useState<string>();
 
-  const onDropHandler = (value: File[]) => {
+  const onDropHandler = useCallback((value: File[]) => {
     const urlFile = URL.createObjectURL(value[0]);
     dispatch(change({
       file: urlFile,
     }));
-  };
+  }, []);
 
   return (
     <div>
