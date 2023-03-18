@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import WalnutPreviewFile from '@/components/PreviewFile/PreviewFile';
 import { imageSlice } from '@/store/imagestore/ImageSlice';
@@ -14,7 +14,7 @@ const ImagesConverter = () => {
 
   const fileType = ['application/pdf'];
 
-  const changeHandler = (files: File[]) => {
+  const changeHandler = useCallback((files: File[]) => {
     const selectedFile = files[0];
 
     if (selectedFile) {
@@ -34,7 +34,7 @@ const ImagesConverter = () => {
     } else {
       console.log('Please choose file!');
     }
-  };
+  }, []);
   return (
     <div className="flex flex-col">
       <div className="bg-slate-400">

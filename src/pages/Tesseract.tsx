@@ -1,9 +1,8 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import { Spinner } from '@/components/ui/Spinner/Spinner';
 import LoadFile from '@/components/ui/LoadFile/LoadFile';
 import { extractStyles } from '@/services/utils';
 import { Languages } from '@/types';
-import React, { useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { createWorker } from 'tesseract.js';
 
 const DEFAULT_LANGUAGE = 'eng';
@@ -19,15 +18,18 @@ const Tesseracts: React.FC = () => {
   const canShowProgress = progress && progress !== 100;
 
   /** Доступность кнопки очистки */
-  const canShowClearButton = !canShowProgress && (selectedImage || recognizedText);
+  const canShowClearButton = useMemo(
+    () => !canShowProgress && (selectedImage || recognizedText),
+    [],
+  );
 
   /** Обработчик прогресса в процентах */
-  const setProgressHandler = (progressNumber: number | undefined) => {
+  const setProgressHandler = useCallback((progressNumber: number | undefined) => {
     if (progressNumber) { setProgress(progressNumber * 100); } else { setProgress(undefined); }
-  };
+  }, []);
 
   /** Функция для работы с tesseract */
-  const recognize = async (files: FileList) => {
+  const recognize = useCallback(async (files: FileList) => {
     if (!files.length) {
       return;
     }
@@ -50,24 +52,24 @@ const Tesseracts: React.FC = () => {
     } catch (error) {
       console.warn(error);
     }
-  };
+  }, []);
 
   /** Хэндлер очистки значений кроме выбора языка */
-  const clearHandler = () => {
+  const clearHandler = useCallback(() => {
     if (progress && progress !== 100) {
       return;
     }
     setSelectedImage(undefined);
     setRecognizedText(undefined);
     setProgressHandler(undefined);
-  };
+  }, []);
 
   /** При изменении языка сбрасываем все */
-  const onSelectLanguageHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const onSelectLanguageHandler = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value as keyof typeof Languages;
     setLanguage(value);
     clearHandler();
-  };
+  }, []);
 
   return (
     <div className="p-6 flex flex-col items-center gap-4">
@@ -124,4 +126,4 @@ const Tesseracts: React.FC = () => {
   );
 };
 
-export default Tesseracts;
+export default React.memo(Tesseracts);
