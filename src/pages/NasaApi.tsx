@@ -23,4 +23,4 @@ const NasaApi: React.FC = () => {
   );
 };
 
-export default NasaApi;
+export default React.memo(NasaApi);
