@@ -5,9 +5,8 @@ import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import { imageSlice } from '@/store/imagestore/ImageSlice';
 import CropImage from '@/components/CropImage/CropImage';
 
-interface ReactPdfPageProps { }
 
-const ReactPdfPage: React.FC<ReactPdfPageProps> = () => {
+const ReactPdfPage: React.FC = () => {
   const { file } = useAppSelector((state) => state.imageReducer);
   const { change } = imageSlice.actions;
   const dispatch = useAppDispatch();
@@ -35,4 +34,4 @@ const ReactPdfPage: React.FC<ReactPdfPageProps> = () => {
   );
 };
 
-export default ReactPdfPage;
+export default React.memo(ReactPdfPage);

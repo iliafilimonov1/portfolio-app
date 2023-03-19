@@ -30,13 +30,15 @@ module.exports = {
     'react',
     '@typescript-eslint',
     'import',
+    'import-newlines',
+    'react-hooks',
   ],
   ignorePatterns: ['./services/SignatureService.js'
   ],
   rules: {
     'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': ['error'
-    ],
+    '@typescript-eslint/consistent-type-imports': 'warn',
+    '@typescript-eslint/no-unused-vars': ['error'],
 
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error'
