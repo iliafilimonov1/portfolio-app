@@ -92,4 +92,4 @@ const CropImage: React.FC<{ file?: string }> = ({ file }) => {
   );
 };
 
-export default CropImage;
+export default React.memo(CropImage);

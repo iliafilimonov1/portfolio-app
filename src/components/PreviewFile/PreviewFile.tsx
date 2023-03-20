@@ -41,4 +41,4 @@ const PreviewFile: React.FC<PreviewfileProps> = ({ file, fileName, fileSize }) =
   );
 };
 
-export default PreviewFile;
+export default React.memo(PreviewFile);

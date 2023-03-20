@@ -34,4 +34,4 @@ const ReactPdf: React.FC<{
   return null;
 };
 
-export default ReactPdf;
+export default React.memo(ReactPdf);

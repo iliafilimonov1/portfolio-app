@@ -40,4 +40,4 @@ const Drawer: React.FC<DrawerProps> = ({
   </main>
 );
 
-export default Drawer;
+export default React.memo(Drawer);

@@ -93,4 +93,4 @@ const Modal: React.FC<ModalProps> = ({ children, onClose, className }) => {
   );
 };
 
-export default Modal;
+export default React.memo(Modal);

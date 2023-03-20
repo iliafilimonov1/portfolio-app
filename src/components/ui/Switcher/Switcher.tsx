@@ -22,4 +22,4 @@ const Switcher: React.FC = () => {
   );
 };
 
-export default Switcher;
+export default React.memo(Switcher);
