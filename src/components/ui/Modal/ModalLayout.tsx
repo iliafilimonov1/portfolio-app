@@ -25,4 +25,4 @@ const ModalLayout = forwardRef<HTMLDivElement, ModalLayoutProps>(({
 ));
 ModalLayout.displayName = 'ModalLayout';
 
-export default ModalLayout;
+export default React.memo(ModalLayout);

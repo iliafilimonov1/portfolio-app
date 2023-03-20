@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { extractStyles } from '@/services/utils';
-import React from 'react';
+import React, { useCallback } from 'react';
 import { LoadFileProps } from './types';
 
 const LoadFile: React.FC<LoadFileProps> = ({
@@ -8,12 +8,13 @@ const LoadFile: React.FC<LoadFileProps> = ({
   title = 'Select file',
   previewFileUrl,
 }) => {
-  const loadFileHandler = (event:React.ChangeEvent<HTMLInputElement>) => {
+
+  const loadFileHandler = useCallback((event:React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
     if (callBack && files?.length) {
       callBack(files);
     }
-  };
+  }, []);
   return (
     <div className="bg-gray-300 px-4 py-2 w-full">
       <label
@@ -35,8 +36,7 @@ const LoadFile: React.FC<LoadFileProps> = ({
             onChange={loadFileHandler}
             type="file"
           />
-          {
-            previewFileUrl
+          { previewFileUrl
               ? (
                 <div className="absolute top-0">
                   {previewFileUrl.map((url) => (
@@ -57,4 +57,4 @@ const LoadFile: React.FC<LoadFileProps> = ({
   );
 };
 
-export default LoadFile;
+export default React.memo(LoadFile);

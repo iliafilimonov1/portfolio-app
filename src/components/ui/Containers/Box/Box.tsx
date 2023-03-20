@@ -21,4 +21,4 @@ const Box:React.FC<BoxProps> = ({
   </div>
 );
 
-export default Box;
+export default React.memo(Box);

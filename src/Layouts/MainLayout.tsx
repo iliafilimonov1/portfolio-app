@@ -8,4 +8,4 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   </>
 );
 
-export default MainLayout;
+export default React.memo(MainLayout);

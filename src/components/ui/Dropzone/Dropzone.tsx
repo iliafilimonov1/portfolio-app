@@ -43,4 +43,4 @@ const Dropzone: React.FC<{
   );
 };
 
-export default Dropzone;
+export default React.memo(Dropzone);
