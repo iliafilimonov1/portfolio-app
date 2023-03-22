@@ -1,12 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-export interface IImage {
-  file?: string;
-  imageSize?: string;
-  imageName?: string;
-}
-
+import { IImage } from './types';
 const initialState: IImage = {
   file: undefined,
   imageSize: undefined,

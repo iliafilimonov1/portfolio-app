@@ -1,8 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { ICounter } from './types';
 
-export interface ICounter {
-  count: number;
-}
 
 const initialState: ICounter = {
   count: 0,
