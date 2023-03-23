@@ -99,4 +99,4 @@ const FramerMotion: React.FC = () => (
   </div>
 );
 
-export default FramerMotion;
+export default React.memo(FramerMotion);

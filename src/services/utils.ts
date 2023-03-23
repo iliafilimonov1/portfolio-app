@@ -25,3 +25,8 @@ export function extractStyles(
 
   return Array.from(result).filter(Boolean).join(' ');
 }
+
+/** Соединение элементов массива в строку  */
+export function joinNonEmpty(arr: unknown[], separator: string = ' '): string {
+  return arr.filter(Boolean).join(separator);
+}
