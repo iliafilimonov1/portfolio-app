@@ -57,4 +57,4 @@ const ImagesConverter = () => {
   );
 };
 
-export default ImagesConverter;
+export default React.memo(ImagesConverter);

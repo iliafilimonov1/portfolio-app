@@ -44,4 +44,4 @@ const Home = () => (
   </div>
 );
 
-export default Home;
+export default React.memo(Home);
