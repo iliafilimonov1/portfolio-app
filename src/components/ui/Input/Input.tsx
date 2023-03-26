@@ -1,5 +1,5 @@
 import { extractStyles } from '@/services/utils';
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useCallback } from 'react';
 import { InputProps } from './types';
 
 export type InputTypes = 'text' | 'number';
@@ -15,12 +15,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
   error,
   postfix,
 }, ref) => {
-  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+
+  const onChangeHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { value: val } = e.target;
     if (onChange) {
       onChange(val);
     }
-  };
+  }, [onChange]);
 
   return (
     <div className="flex flex-col">

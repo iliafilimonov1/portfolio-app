@@ -14,7 +14,7 @@ const LoadFile: React.FC<LoadFileProps> = ({
     if (callBack && files?.length) {
       callBack(files);
     }
-  }, []);
+  }, [callBack]);
   return (
     <div className="bg-gray-300 px-4 py-2 w-full">
       <label
