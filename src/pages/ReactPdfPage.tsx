@@ -18,7 +18,7 @@ const ReactPdfPage: React.FC = () => {
     dispatch(change({
       file: urlFile,
     }));
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>

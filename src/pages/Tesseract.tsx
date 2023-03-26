@@ -26,7 +26,7 @@ const Tesseracts: React.FC = () => {
   /** Обработчик прогресса в процентах */
   const setProgressHandler = useCallback((progressNumber: number | undefined) => {
     if (progressNumber) { setProgress(progressNumber * 100); } else { setProgress(undefined); }
-  }, []);
+  }, [setProgress]);
 
   /** Функция для работы с tesseract */
   const recognize = useCallback(async (files: FileList) => {
@@ -52,7 +52,7 @@ const Tesseracts: React.FC = () => {
     } catch (error) {
       console.warn(error);
     }
-  }, []);
+  }, [setRecognizedText]);
 
   /** Хэндлер очистки значений кроме выбора языка */
   const clearHandler = useCallback(() => {
@@ -62,14 +62,14 @@ const Tesseracts: React.FC = () => {
     setSelectedImage(undefined);
     setRecognizedText(undefined);
     setProgressHandler(undefined);
-  }, []);
+  }, [setSelectedImage, setRecognizedText, setProgressHandler, progress]);
 
   /** При изменении языка сбрасываем все */
   const onSelectLanguageHandler = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value as keyof typeof Languages;
     setLanguage(value);
     clearHandler();
-  }, []);
+  }, [clearHandler, setLanguage]);
 
   return (
     <div className="p-6 flex flex-col items-center gap-4">

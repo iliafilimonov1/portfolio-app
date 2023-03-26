@@ -57,7 +57,6 @@ const FramerMotion: React.FC = () => (
         initial="hidden"
         variants={textAnimation}
         whileInView="visible"
-
       >
         Screen 2
       </motion.div>
