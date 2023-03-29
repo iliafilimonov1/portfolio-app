@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 
@@ -12,10 +12,10 @@ const CropImage: React.FC<{ file?: string }> = ({ file }) => {
 
   const [result, setResult] = useState<string>();
 
-  const changeHandle = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const changeHandle = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const urlFile = e.target.files ? URL.createObjectURL(e.target.files[0]) : undefined;
     selectFile(urlFile);
-  };
+  }, []);
 
   useEffect(() => {
     selectFile(file);
