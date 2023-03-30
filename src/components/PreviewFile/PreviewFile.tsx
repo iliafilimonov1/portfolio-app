@@ -13,9 +13,9 @@ interface PreviewfileProps {
   fileSize: string;
 }
 
-const PreviewFile: React.FC<PreviewfileProps> = ({ file, fileName, fileSize }) => {
-  const newplugin = defaultLayoutPlugin();
-  return (
+const newplugin = defaultLayoutPlugin();
+
+const PreviewFile: React.FC<PreviewfileProps> = ({ file, fileName, fileSize }) => 
     (
       <div className="bg-slate-50">
 
@@ -37,8 +37,6 @@ const PreviewFile: React.FC<PreviewfileProps> = ({ file, fileName, fileSize }) =
           </div>
         </div>
       </div>
-    )
-  );
-};
+    );
 
 export default React.memo(PreviewFile);
