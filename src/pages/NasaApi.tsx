@@ -1,6 +1,7 @@
 import { useGetPhotosQuery } from '@/store/Nasa/nasaApi';
 import React from 'react';
 
+/** Страница с фотками марсохода */
 const NasaApi: React.FC = () => {
   const { data } = useGetPhotosQuery();
 
