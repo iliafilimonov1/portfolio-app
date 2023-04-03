@@ -42,7 +42,6 @@ const FramerMotion: React.FC = () => (
         whileInView="visible"
 
       >
-        {' '}
         Screen 1
       </motion.div>
     </motion.div>
@@ -57,7 +56,6 @@ const FramerMotion: React.FC = () => (
         initial="hidden"
         variants={textAnimation}
         whileInView="visible"
-
       >
         Screen 2
       </motion.div>
@@ -75,7 +73,6 @@ const FramerMotion: React.FC = () => (
         whileInView="visible"
 
       >
-        {' '}
         Screen 3
       </motion.div>
     </motion.div>
@@ -92,7 +89,6 @@ const FramerMotion: React.FC = () => (
         whileInView="visible"
 
       >
-        {' '}
         Sreen 4
       </motion.div>
     </motion.div>

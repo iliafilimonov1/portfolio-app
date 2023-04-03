@@ -5,6 +5,9 @@ import { imageSlice } from '@/store/imagestore/ImageSlice';
 import CropImage from '@/components/CropImage/CropImage';
 import Dropzone from '@/components/ui/Dropzone/Dropzone';
 
+const fileType = ['application/pdf'];
+
+/** Конвертер в PDF */
 const ImagesConverter = () => {
   const { file, imageName, imageSize } = useAppSelector((state) => state.imageReducer);
   const { change } = imageSlice.actions;
@@ -12,7 +15,6 @@ const ImagesConverter = () => {
 
   const [error, setError] = useState<boolean>();
 
-  const fileType = ['application/pdf'];
 
   const changeHandler = useCallback((files: File[]) => {
     const selectedFile = files[0];
@@ -34,7 +36,7 @@ const ImagesConverter = () => {
     } else {
       console.log('Please choose file!');
     }
-  }, []);
+  }, [dispatch, change]);
   return (
     <div className="flex flex-col">
       <div className="bg-slate-400">

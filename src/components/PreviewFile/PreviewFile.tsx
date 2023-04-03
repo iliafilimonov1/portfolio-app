@@ -3,19 +3,13 @@ import React from 'react';
 import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 import { Viewer, Worker, Plugin } from '@react-pdf-viewer/core';
 
-// Import styles
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+import { PreviewFileProps } from './types';
 
-interface PreviewfileProps {
-  file: string;
-  fileName: string;
-  fileSize: string;
-}
+const newPlugin = defaultLayoutPlugin();
 
-const PreviewFile: React.FC<PreviewfileProps> = ({ file, fileName, fileSize }) => {
-  const newplugin = defaultLayoutPlugin();
-  return (
+const PreviewFile: React.FC<PreviewFileProps> = ({ file, fileName, fileSize }) => 
     (
       <div className="bg-slate-50">
 
@@ -25,7 +19,7 @@ const PreviewFile: React.FC<PreviewfileProps> = ({ file, fileName, fileSize }) =
               <div className="w-[75vw] h-[80vh] overflow-hidden">
                 <Viewer
                   fileUrl={file}
-                  plugins={[newplugin as Plugin]}
+                  plugins={[newPlugin as Plugin]}
                 />
               </div>
             )}
@@ -37,8 +31,6 @@ const PreviewFile: React.FC<PreviewfileProps> = ({ file, fileName, fileSize }) =
           </div>
         </div>
       </div>
-    )
-  );
-};
+    );
 
 export default React.memo(PreviewFile);
