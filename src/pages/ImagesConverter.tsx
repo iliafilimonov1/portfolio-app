@@ -37,13 +37,13 @@ const ImagesConverter = () => {
       console.log('Please choose file!');
     }
   }, [dispatch, change]);
+  
   return (
     <div className="flex flex-col">
       <div className="bg-slate-400">
         <Dropzone onDrop={changeHandler} />
         {error && <div>Необходим файл PDF</div>}
       </div>
-
       <div className="bg-blue-200">
         <WalnutPreviewFile
           file={(file as string) ?? ''}
@@ -51,7 +51,6 @@ const ImagesConverter = () => {
           fileSize={imageSize ?? ''}
         />
       </div>
-
       <div>
         <CropImage file={file} />
       </div>
