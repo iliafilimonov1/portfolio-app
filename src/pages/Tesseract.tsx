@@ -5,12 +5,15 @@ import { Languages } from '@/types';
 import React, { useCallback, useMemo, useState } from 'react';
 import { createWorker } from 'tesseract.js';
 
-const DEFAULT_LANGUAGE = 'eng';
+/** Язык по умолчанию */
+const DEFAULT_LANGUAGE: keyof typeof Languages = 'eng';
 
 /** Страница распознавания текста по картинке */
 const Tesseracts: React.FC = () => {
   const [recognizedText, setRecognizedText] = useState<string>();
+  /** Загруженное пользователем изображение */
   const [selectedImage, setSelectedImage] = useState<string[]>();
+  /** Массив доступных языков */
   const [language, setLanguage] = useState<keyof typeof Languages>(DEFAULT_LANGUAGE);
   const [progress, setProgress] = useState<number>();
 

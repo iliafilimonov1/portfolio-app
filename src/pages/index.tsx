@@ -4,6 +4,7 @@ import Box from '@/components/ui/Containers/Box/Box';
 import Head from 'next/head';
 import React from 'react';
 
+/** Домашняя страница */
 const Home = () => (
   <div>
     <Head>

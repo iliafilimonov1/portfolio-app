@@ -7,6 +7,7 @@ const NasaApi: React.FC = () => {
 
   return (
     <div className="p-4 grid grid-cols-4 gap-2">
+      <div>NASA</div>
       {!!data?.photos.length && data?.photos.map(({ img_src, id, earth_date }) => (
         <div
           key={id}
