@@ -1,12 +1,10 @@
 import React, { useCallback, useEffect } from 'react';
 import { pdfjs } from 'react-pdf';
+import { ReactPDFProps } from './types';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
-const ReactPdf: React.FC<{
-  pdfFileUrl?: string;
-  onConvert?: (url: string) => void;
-}> = ({ pdfFileUrl, onConvert }) => {
+const ReactPdf: React.FC<ReactPDFProps> = ({ pdfFileUrl, onConvert }) => {
 
   const handleConvertClick = useCallback(async (file: string) => {
     try {
