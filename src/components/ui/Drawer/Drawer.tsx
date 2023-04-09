@@ -5,12 +5,19 @@ export interface DrawerProps {
   children?: React.ReactNode;
   isOpen: boolean;
   setIsOpen: (value: boolean) => void;
+  position?: 'right' | 'left';
+  header?: React.ReactNode;
+  footer?: React.ReactNode;
 }
 
+/** Всплывающее меню */
 const Drawer: React.FC<DrawerProps> = ({
   children,
   isOpen,
   setIsOpen,
+  position = 'right',
+  header,
+  footer
 }) => (
   <main
     className={
@@ -29,8 +36,9 @@ const Drawer: React.FC<DrawerProps> = ({
       }
     >
       <article className="relative w-screen max-w-lg pb-10 flex flex-col space-y-6 overflow-y-scroll h-full">
-        <header className="p-4 font-bold text-lg">Header</header>
+        <header className="p-4 font-bold text-lg">{header}</header>
         {children}
+        <footer>{footer}</footer>
       </article>
     </section>
     <section
