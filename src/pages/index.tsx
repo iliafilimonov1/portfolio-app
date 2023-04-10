@@ -23,23 +23,7 @@ const Home = () => (
       />
     </Head>
     <div className="px-6 py-10 grid grid-cols-2 gap-2">
-      {
-        Array(10).fill(1).map((_, i) => (
-          <Box
-            key={`${i.toString()}_`}
-            footer={<span>Какой-то футер</span>}
-            header="Заголовок"
-            headerButtons={(
-              <>
-                <Button variant="subtle">Кнопка</Button>
-                <Button variant="subtle">Кнопка</Button>
-              </>
-            )}
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, autem iste nobis magnam delectus laborum iure libero quasi tempore sapiente temporibus aliquam provident id odio animi et ducimus suscipit perferendis facere? Ullam error consectetur est sapiente. Nobis, nisi sed laborum mollitia ab quia reprehenderit. Illo dolores similique perspiciatis explicabo at eius expedita recusandae ipsa repellat quasi aut dolor a, unde tempora, itaque aperiam. Quia aut ullam et ipsam! Ex ea culpa nobis suscipit, voluptates magnam? Tempore sint veniam eum earum minus ab voluptatem eius illum aperiam, est fugiat animi porro delectus adipisci rem provident magni ducimus cupiditate vitae eaque eveniet.
-          </Box>
-        ))
-      }
+      content
     </div>
   </div>
 );
