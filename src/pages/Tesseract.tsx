@@ -1,15 +1,15 @@
 import { Spinner } from '@/components/ui/Spinner/Spinner';
 import LoadFile from '@/components/ui/LoadFile/LoadFile';
 import { extractStyles } from '@/services/utils';
-import { Languages } from '@/types';
 import React, { useCallback, useMemo, useState } from 'react';
 import { createWorker } from 'tesseract.js';
+import { Languages } from '@/enums';
 
 /** Язык по умолчанию */
 const DEFAULT_LANGUAGE: keyof typeof Languages = 'eng';
 
 /** Страница распознавания текста по картинке */
-const Tesseracts: React.FC = () => {
+const Tesseracts: React.FC = ()   =>  {
   const [recognizedText, setRecognizedText] = useState<string>();
   /** Загруженное пользователем изображение */
   const [selectedImage, setSelectedImage] = useState<string[]>();
