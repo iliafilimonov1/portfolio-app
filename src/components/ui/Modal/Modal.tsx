@@ -10,6 +10,10 @@ import ReactDom from 'react-dom';
 import ModalLayout from './ModalLayout';
 import type { ModalProps } from './types';
 
+const modal = document.createElement('div');
+modal.id = 'modal';
+document.appendChild(modal);
+
 const modalRoot = document.getElementById('modal');
 
 /** Длительность анимации с мс */
