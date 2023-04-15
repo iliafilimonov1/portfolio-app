@@ -1,5 +1,6 @@
 import React from 'react';
+import { TabLayoutProps } from './types';
 
-const TabLayout: React.FC = ()=> (<div></div>);
+const TabLayout: React.FC<TabLayoutProps> = ({children})=> (<div>{children}</div>);
 
 export default React.memo(TabLayout);
