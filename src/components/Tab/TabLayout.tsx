@@ -3,8 +3,7 @@ import { TabLayoutProps } from './types';
 
 const TabLayout: React.FC<TabLayoutProps> = ({children})=> {
   const childrenArray = useMemo(()=> {
-    console.log(children);
-    
+    return Array.isArray(children) ? children.flat(): [children]
   },[])
   const [activeTab, setActiveTab] = useState()
   return (<div className='flex'>{children}</div>)};
