@@ -15,6 +15,7 @@ const navItems: NavItem[] = [
   { label: 'Tesseract', link: '/Tesseract' },
   { label: 'Framer-motion', link: '/FramerMotion' },
   { label: 'NASAApi', link: '/NasaApi' },
+  { label: 'Frameworks', link: '/Frameworks' },
 ];
 
 /** Компонент панель навигации */

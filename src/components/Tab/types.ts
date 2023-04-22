@@ -6,6 +6,7 @@ type TabChildren = ReactElement<TabProps, typeof TabPanel>
 export interface TabProps {
     children?: React.ReactNode;
     title?: React.ReactNode;
+    accessor: string;
 }
 
 export interface TabLayoutProps {
