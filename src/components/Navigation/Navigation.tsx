@@ -1,12 +1,13 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 import { Globe, User } from 'lucide-react';
 import { AiFillFilePdf } from 'react-icons/ai';
 import { IoLogoApple } from 'react-icons/io';
+import { useToggle } from 'usehooks-ts';
+import { extractStyles } from '@/services/utils';
 import Button from '../ui/Button/Button';
 import { NavItem } from './types';
 import Drawer from '../ui/Drawer/Drawer';
-import { useToggle } from 'usehooks-ts';
 
 /** Элементы навишации */
 const navItems: NavItem[] = [
@@ -23,12 +24,28 @@ const Navigation: React.FC = () => {
   /** Для маршрутизации */
   const router = useRouter();
 
-  const [drawer, toggleDrawer] = useToggle()
+  const [drawer, toggleDrawer] = useToggle();
+
+  const [activeLink, setActiveLink] = useState<string>();
+
+  const onClickLinkHandler = useCallback((link: string) => {
+    router.push(link);
+    setActiveLink(link);
+  }, []);
 
   return (
     <header className="shadow bg-white h-16 mx-auto px-5 flex items-center justify-between">
-      <button onClick={toggleDrawer}>open drawer</button>
-      <Drawer isOpen={drawer} setIsOpen={toggleDrawer} position='left' />
+      <button
+        onClick={toggleDrawer}
+        type="button"
+      >
+        open drawer
+      </button>
+      <Drawer
+        isOpen={drawer}
+        position="left"
+        setIsOpen={toggleDrawer}
+      />
       <IoLogoApple
         onClick={() => router.push('/')}
         size={40}
@@ -37,7 +54,12 @@ const Navigation: React.FC = () => {
         {navItems.map((item) => (
           <Button
             key={item.link}
-            onClick={() => router.push(item.link)}
+            className={
+              extractStyles`
+                ${item.link === activeLink ? 'bg-slate-100' : ''}
+              `
+            }
+            onClick={() => onClickLinkHandler(item.link)}
             variant="ghost"
           >
             {item.label}

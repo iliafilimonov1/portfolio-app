@@ -1,6 +1,3 @@
-/* eslint-disable max-len */
-import Button from '@/components/ui/Button/Button';
-import Box from '@/components/ui/Containers/Box/Box';
 import Head from 'next/head';
 import React from 'react';
 

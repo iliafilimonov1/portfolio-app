@@ -1,15 +1,15 @@
-import { useGetPhotosQuery } from "@/store/Nasa/nasaApi";
-import React from "react";
+import { useGetPhotosQuery } from '@/store/Nasa/nasaApi';
+import React from 'react';
 
 /** Страница с фотками марсохода */
 const NasaApi: React.FC = () => {
-  const { data } =   useGetPhotosQuery();
+  const { data } = useGetPhotosQuery();
 
   return (
     <div className="p-4 grid grid-cols-4 gap-2">
       <div>NASA</div>
-      {!!data?.photos.length &&
-        data?.photos.map(({ img_src, id, earth_date }) => (
+      {!!data?.photos.length
+        && data?.photos.map(({ img_src, id, earth_date }) => (
           <div
             key={id}
             className="relative hover:scale-110 hover:z-50 transition-all "
