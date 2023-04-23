@@ -1,35 +1,53 @@
-import React, { useMemo, useState } from 'react';
+import React, {
+  useMemo, useState, useCallback,
+} from 'react';
 import { extractStyles } from '@/services/utils';
 import { TabLayoutProps } from './types';
 
 const TabLayout: React.FC<TabLayoutProps> = ({ children }) => {
-  const childrenArray = useMemo(() => (Array.isArray(children) ? children.flat() : [children]), []);
-  const [activeTabAccessor, setActiveTabAccessor] = useState<string | undefined>();
+  const currentTabComponentIndex = `tabs_${document.querySelectorAll('#tab_component').length.toString()}`;
+  const currentHash = window.location.hash.split('').filter(Boolean);
+  console.log(currentHash);
 
+  const childrenArray = useMemo(() => {
+    const preparedChildren = Array.isArray(children) ? children.flat() : [children];
+    return preparedChildren.map((child) => child?.props).map((child) => ({
+      ...child,
+      accessor: `${String(currentTabComponentIndex)}${child?.accessor}`,
+    }));
+  }, []);
+  const [activeTabAccessor, setActiveTabAccessor] = useState<string | undefined>();
   const activeContent = useMemo(() => childrenArray.find(
-    (child) => child?.props.accessor === activeTabAccessor,
+    (child) => child?.accessor === activeTabAccessor,
   ), [childrenArray, activeTabAccessor]);
 
+  const changeActiveTabHandler = useCallback((accessor: string) => {
+    setActiveTabAccessor(accessor);
+  }, []);
+
   return (
-    <div className="flex">
+    <div
+      className="flex flex-col"
+      id="tab_component"
+    >
       <div>
         {childrenArray.map((child) => (
           <div
-            key={child?.props.accessor}
+            key={child?.accessor}
             className={extractStyles`
             ${
-          child?.props.accessor === activeTabAccessor
+          child?.accessor === activeTabAccessor
             ? 'bg-red-400'
             : 'bg-green-400'
           }
           `}
-            onClick={() => setActiveTabAccessor(child?.props.accessor)}
+            onClick={() => changeActiveTabHandler(child.accessor)}
           >
-            {child?.props.title}
+            {child?.title}
           </div>
         ))}
       </div>
-      <div>{activeContent?.props.children}</div>
+      <div>{activeContent?.children}</div>
     </div>
   );
 };
