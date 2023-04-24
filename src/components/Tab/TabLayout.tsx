@@ -1,11 +1,11 @@
 import React, {
-  useMemo, useState, useCallback,
+  useMemo, useState, useCallback, useEffect,
 } from 'react';
 import { extractStyles } from '@/services/utils';
 import { TabLayoutProps } from './types';
 
 const TabLayout: React.FC<TabLayoutProps> = ({ children }) => {
-  const currentTabComponentIndex = `tabs_${document.querySelectorAll('#tab_component').length.toString()}`;
+  const currentTabPrefix = `tabs_${document.querySelectorAll('#tab_component').length.toString()}`;
   const currentHash = window.location.hash.split('').filter(Boolean);
   console.log(currentHash);
 
@@ -13,16 +13,25 @@ const TabLayout: React.FC<TabLayoutProps> = ({ children }) => {
     const preparedChildren = Array.isArray(children) ? children.flat() : [children];
     return preparedChildren.map((child) => child?.props).map((child) => ({
       ...child,
-      accessor: `${String(currentTabComponentIndex)}${child?.accessor}`,
+      accessor: `${String(currentTabPrefix)}${child?.accessor}`,
     }));
   }, []);
   const [activeTabAccessor, setActiveTabAccessor] = useState<string | undefined>();
-  const activeContent = useMemo(() => childrenArray.find(
+
+  /** Активный таб из дочерних табов */
+  const activeTab = useMemo(() => childrenArray.find(
     (child) => child?.accessor === activeTabAccessor,
   ), [childrenArray, activeTabAccessor]);
 
   const changeActiveTabHandler = useCallback((accessor: string) => {
     setActiveTabAccessor(accessor);
+  }, []);
+
+  useEffect(() => {
+    const hasPrefixInHash = !!currentHash.find((h) => h.includes(currentTabPrefix));
+    if (hasPrefixInHash) {
+      window.location.hash = `${currentTabPrefix}${activeTab?.accessor}`;
+    }
   }, []);
 
   return (
@@ -47,7 +56,7 @@ const TabLayout: React.FC<TabLayoutProps> = ({ children }) => {
           </div>
         ))}
       </div>
-      <div>{activeContent?.children}</div>
+      <div>{activeTab?.children}</div>
     </div>
   );
 };
