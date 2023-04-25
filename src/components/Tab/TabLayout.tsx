@@ -7,7 +7,6 @@ import { TabLayoutProps } from './types';
 const TabLayout: React.FC<TabLayoutProps> = ({ children }) => {
   const currentTabPrefix = `tabs_${document.querySelectorAll('#tab_component').length.toString()}`;
   const currentHash = window.location.hash.split('').filter(Boolean);
-  console.log(currentHash);
 
   const childrenArray = useMemo(() => {
     const preparedChildren = Array.isArray(children) ? children.flat() : [children];
@@ -24,6 +23,7 @@ const TabLayout: React.FC<TabLayoutProps> = ({ children }) => {
   ), [childrenArray, activeTabAccessor]);
 
   const changeActiveTabHandler = useCallback((accessor: string) => {
+    window.location.hash = accessor;
     setActiveTabAccessor(accessor);
   }, []);
 
