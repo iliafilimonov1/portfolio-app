@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
-import { DropdownProps } from './types';
+import React, { useCallback, useState } from 'react';
+import { DropdownButton, DropdownProps } from './types';
 
 const Dropdown: React.FC<DropdownProps> = ({
   buttons, defaultButton,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const onButtonClickHandler = useCallback(async (btn: DropdownButton) => {
+    btn.onClick();
+    setIsOpen(false);
+  }, []);
 
   return (
     <div className="relative">
@@ -25,10 +30,12 @@ const Dropdown: React.FC<DropdownProps> = ({
         </button>
       </div>
       {isOpen && (
-        <div className="flex flex-col absolute">
+        <div className="flex flex-col absolute top-1">
           {buttons.map((btn) => (
             <button
               key={btn.id}
+              className="hover:bg-green-400"
+              onClick={() => onButtonClickHandler(btn)}
               type="button"
               {...btn}
             >
