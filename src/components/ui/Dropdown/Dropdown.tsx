@@ -7,7 +7,7 @@ const Dropdown: React.FC<DropdownProps> = ({
   const [isOpen, setIsOpen] = useState(false);
 
   const onButtonClickHandler = useCallback(async (btn: DropdownButton) => {
-    btn.onClick();
+    btn?.onClick();
     setIsOpen(false);
   }, []);
 
@@ -33,11 +33,11 @@ const Dropdown: React.FC<DropdownProps> = ({
         <div className="flex flex-col absolute top-1">
           {buttons.map((btn) => (
             <button
+              {...btn}
               key={btn.id}
               className="hover:bg-green-400"
               onClick={() => onButtonClickHandler(btn)}
               type="button"
-              {...btn}
             >
               {btn.label}
             </button>
