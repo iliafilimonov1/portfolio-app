@@ -9,6 +9,7 @@ module.exports = {
     extend: {},
   },
   plugins: [
+    require('./src/components/ui/tailwindClasses.config'),
     plugin(function({addComponents}){
       addComponents({
         /** Базовые стили свитчера */
