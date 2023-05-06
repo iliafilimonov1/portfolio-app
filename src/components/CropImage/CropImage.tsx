@@ -21,7 +21,8 @@ const CropImage: React.FC<{ file?: string }> = ({ file }) => {
     selectFile(file);
   }, [file]);
 
-  const getCroppedImg =useCallback(()=> {
+  /** Получить изображение */
+  const getCroppedImg = useCallback(() => {
     if (!image) {
       return;
     }
@@ -48,7 +49,7 @@ const CropImage: React.FC<{ file?: string }> = ({ file }) => {
       const base64Image = canvas.toDataURL('image/jpeg');
       setResult(base64Image);
     });
-  }, [document, image])
+  }, [document, image]);
 
   return (
     <div className="container">
@@ -78,10 +79,10 @@ const CropImage: React.FC<{ file?: string }> = ({ file }) => {
           </>
         )}
         {result && (
-            <img
-              alt="asd"
-              src={result}
-            />
+          <img
+            alt="asd"
+            src={result}
+          />
         )}
       </div>
     </div>
