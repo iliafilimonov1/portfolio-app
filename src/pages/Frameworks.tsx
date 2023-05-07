@@ -2,6 +2,10 @@ import TabLayout from '@/components/Tab/TabLayout';
 import TabPanel from '@/components/Tab/TabPanel';
 import React from 'react';
 
+/**
+ * Думаю тут сделать страницу которая далее в себе
+ * содержит блоки (тоже страницы) с реализацией разных библиотек
+ **/
 const Frameworks: React.FC = () => (
   <>
     <div className="h-[100px] w-[100px] bg-red-400">1</div>
