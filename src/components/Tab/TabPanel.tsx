@@ -2,7 +2,7 @@ import React from 'react';
 import { TabProps } from './types';
 
 const TabPanel: React.FC<TabProps> = ({ children, title }) => (
-  <div>
+  <div className="flex flex-col">
     <div>{title}</div>
     <div>{children}</div>
   </div>
