@@ -6,8 +6,12 @@ const Box:React.FC<BoxProps> = ({
   footer,
   header,
   headerButtons,
+  onClick,
 }) => (
-  <div className="w-full shadow-sm rounded-lg bg-slate-100 hover:shadow-md hover:scale-[1.003] duration-1000 transition-all">
+  <div
+    className="w-full shadow-sm rounded-lg bg-slate-100 hover:shadow-md hover:scale-[1.003] duration-1000 transition-all"
+    onClick={onClick}
+  >
     {header && (
       <div className="px-6 py-4 border-b-[1px] border-slate-300 flex items-center justify-between">
         <div>{header}</div>
