@@ -3,4 +3,5 @@ export interface BoxProps {
   headerButtons?: React.ReactNode;
   children: React.ReactNode;
   footer?: React.ReactNode;
+  onClick?: ()=> void;
 }
