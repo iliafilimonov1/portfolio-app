@@ -10,10 +10,6 @@ import ReactDom from 'react-dom';
 import ModalLayout from './ModalLayout';
 import type { ModalProps } from './types';
 
-const modal = document.createElement('div');
-modal.id = 'modal';
-document.appendChild(modal);
-
 const modalRoot = document.getElementById('modal');
 
 /** Длительность анимации с мс */
@@ -22,6 +18,12 @@ const ModalAnimationDuration = 400;
 const Modal: React.FC<ModalProps> = ({ children, onClose, className }) => {
   /** Открыта ли модалка (для анимации) */
   const [isOpen, setOpen] = useState(false);
+
+  if (!modalRoot) {
+    const portal = document.createElement('div');
+    portal.id = 'modal';
+    document.body.appendChild(portal);
+  }
 
   /** Запуск анимации открытия модалки */
   const openModal = () => {
