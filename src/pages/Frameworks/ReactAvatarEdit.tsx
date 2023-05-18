@@ -14,13 +14,12 @@ const ReactAvatarEdit: React.FC = () => {
 
   const saveHandler = useCallback(() => {
     if (ref.current) {
-      // This returns a HTMLCanvasElement, it can be made into a data URL or a blob,
-      // drawn on another canvas, or added to the DOM.
       const canvas = ref.current.getImage();
-
-      // If you want the image resized to the canvas size (also a HTMLCanvasElement)
-      const canvasScaled = ref.current.getImageScaledToCanvas();
-      return [canvas, canvasScaled];
+      canvas.toBlob((blob: Blob) => {
+        const result = new Blob([blob], { type: 'image/jpeg' });
+        /** Здесь нужен вызов callback */
+        return result;
+      }, 'image/jpeg');
     }
     return undefined;
   }, []);
