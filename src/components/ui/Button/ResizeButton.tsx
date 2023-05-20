@@ -3,16 +3,7 @@ import React, {
   useEffect, useLayoutEffect, useRef, useState,
 } from 'react';
 import { BiLoaderCircle } from 'react-icons/bi';
-
-interface ResizeButtonProps {
-  label?: string;
-  icon?: React.ReactNode;
-  iconPosition?: 'left' | 'right';
-  onClick?: ()=>void;
-  loading?: boolean;
-  disabled?: boolean;
-  onFocus?: ()=> void;
-}
+import { ResizeButtonProps } from './types';
 
 const ResizeButton: React.FC<ResizeButtonProps> = ({
   disabled,
