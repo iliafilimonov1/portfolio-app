@@ -35,7 +35,7 @@ const Frameworks: React.FC = () => {
         >
           <div className="flex items-start gap-2">
             <div>{framework.icon}</div>
-            <div>Библиотека для обрезания! Изображений.</div>
+            <div>{framework.description}</div>
           </div>
         </Box>
       ))}
