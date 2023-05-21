@@ -52,14 +52,22 @@ const ResizeButton: React.FC<ResizeButtonProps> = ({
   }, []);
 
   return (
-    <div ref={buttonContainerRef}>
-      {loading
+    <div
+      ref={buttonContainerRef}
+      className={extractStyles`
+        px-4 py-2 rounded-lg text-white
+        whitespace-nowrap bg-red-900
+        flex items-center w-fit gap-2
+        cursor-pointer
+      `}
+    >
+      {!loading
         ? (
           <>
             <div className={
               extractStyles`
                 ${iconPosition === 'right' && 'order-1'}
-            `
+              `
             }
             >
               {icon}
@@ -68,10 +76,7 @@ const ResizeButton: React.FC<ResizeButtonProps> = ({
               !showOnlyIcon && (
                 <button
                   className={
-                    extractStyles`
-                        px-4 py-2 rounded-sm border-1
-                        whitespace-nowrap
-                `
+                    extractStyles``
                   }
                   disabled={disabled}
                   onClick={onClick}
