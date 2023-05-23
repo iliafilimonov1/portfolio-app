@@ -16,7 +16,7 @@ const ResizeButton: React.FC<ResizeButtonProps> = ({
 }) => {
   const buttonContainerRef = useRef<HTMLDivElement>(null);
   const [buttonContainerWidth, setButtonContainerWidth] = useState<number>();
-  const [showOnlyIcon, setShowOnlyIcon] = useState<boolean>();
+  const [showOnlyIcon, setShowOnlyIcon] = useState<{ wrap: boolean }>({ wrap: false });
 
   useLayoutEffect(() => {
     if (loading) {
@@ -29,7 +29,7 @@ const ResizeButton: React.FC<ResizeButtonProps> = ({
     const buttonParent = buttonContainerRef.current?.parentElement;
     if (buttonParent && buttonContainerWidth) {
       if (buttonParent.clientWidth < buttonContainerWidth) {
-        setShowOnlyIcon(true);
+        setShowOnlyIcon((prev) => ({ wrap: !prev }));
       }
     }
   }, []);
@@ -38,7 +38,7 @@ const ResizeButton: React.FC<ResizeButtonProps> = ({
     const buttonParent = buttonContainerRef.current?.parentElement;
     if (buttonParent) {
       const resizeCallback = () => {
-        setShowOnlyIcon(false);
+        setShowOnlyIcon((prev) => ({ wrap: !prev }));
         setButtonContainerWidth(buttonContainerRef.current?.clientWidth);
       };
 
