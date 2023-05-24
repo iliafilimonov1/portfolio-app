@@ -30,3 +30,7 @@ export function extractStyles(
 export function joinNonEmpty(arr: unknown[], separator: string = ' '): string {
   return arr.filter(Boolean).join(separator);
 }
+
+export function hasKeyInType<T extends Object>(obj: T, key: string): boolean {
+  return key in obj;
+}
