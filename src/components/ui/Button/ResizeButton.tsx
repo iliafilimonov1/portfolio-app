@@ -5,6 +5,7 @@ import React, {
 import { BiLoaderCircle } from 'react-icons/bi';
 import { ResizeButtonProps } from './types';
 
+/** Кнопка изменяющая размер в зависимости от ширины родительского контейнера */
 const ResizeButton: React.FC<ResizeButtonProps> = ({
   disabled,
   icon,
@@ -64,29 +65,25 @@ const ResizeButton: React.FC<ResizeButtonProps> = ({
       {!loading
         ? (
           <>
-            <div className={
-              extractStyles`
+            <div className={extractStyles`
                 ${iconPosition === 'right' && 'order-1'}
-              `
-            }
+              `}
             >
               {icon}
             </div>
-            {
-              !showOnlyIcon && (
-                <button
-                  className={
-                    extractStyles``
-                  }
-                  disabled={disabled}
-                  onClick={onClick}
-                  onFocus={onFocus}
-                  type="button"
-                >
-                  {label}
-                </button>
-              )
-            }
+            {!showOnlyIcon && (
+              <button
+                className={
+                  extractStyles``
+                }
+                disabled={disabled}
+                onClick={onClick}
+                onFocus={onFocus}
+                type="button"
+              >
+                {label}
+              </button>
+            )}
           </>
         )
         : <BiLoaderCircle />}
