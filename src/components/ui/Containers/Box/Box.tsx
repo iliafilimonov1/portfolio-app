@@ -25,4 +25,6 @@ const Box:React.FC<BoxProps> = ({
   </div>
 );
 
+Box.displayName = 'Box';
+
 export default React.memo(Box);
