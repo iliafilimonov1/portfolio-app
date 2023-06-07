@@ -1,3 +1,4 @@
+import Input from '@/components/ui/Input/Input';
 import Head from 'next/head';
 import React from 'react';
 
@@ -20,9 +21,19 @@ const Home = () => (
       />
     </Head>
     <div className="px-6 py-10 grid grid-cols-2 gap-2">
-      content
+      <div>
+        <Input
+          label="Имя"
+        />
+        <Input
+          label="Фамилия"
+        />
+        <Input
+          label="Отчество"
+        />
+      </div>
     </div>
   </div>
 );
 
-export default React.memo(Home);
+export default Home;
