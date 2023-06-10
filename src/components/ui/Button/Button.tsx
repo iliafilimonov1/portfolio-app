@@ -35,7 +35,7 @@ const buttonVariants = cva(
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
   VariantProps<typeof buttonVariants> {
-  onClick: ()=> void;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -47,7 +47,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       ref={ref}
       className={cn(buttonVariants({ variant, size, className }))}
       onClick={onClick}
-      type="button"
+      // eslint-disable-next-line react/button-has-type
+      type={props.type || 'button'}
     />
   ),
 );
