@@ -3,11 +3,11 @@ import Input from '@/components/ui/Input/Input';
 import React, { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import useStores from '@/hooks/useStores';
-import { Student } from '@/store/StudentsStore/StudentsStore';
+import { Student } from '@/store/StudentStore/StudentViewModel';
 import Table from '@/components/ui/Table/Table';
 
 const ExamplePage: React.FC = () => {
-  const { studentsStore } = useStores();
+  const { studentStore } = useStores();
 
   const [data, setData] = useState<Student>(); // данные пользака
 
@@ -20,7 +20,7 @@ const ExamplePage: React.FC = () => {
   };
 
   const onsubmitHandler = () => {
-    studentsStore.addNewStudent(data ?? {});
+    studentStore.addNewStudent(data ?? {});
     setData(undefined);
   };
 

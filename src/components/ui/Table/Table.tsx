@@ -1,4 +1,4 @@
-import { Student } from '@/store/StudentsStore/StudentsStore';
+import { Student } from '@/store/StudentStore/StudentViewModel';
 import React from 'react';
 
 const Table: React.FC<{ data: Student[] }> = ({ data }) => (

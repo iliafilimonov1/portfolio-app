@@ -1,21 +1,31 @@
-import { makeAutoObservable } from 'mobx';
+import { makeAutoObservable, runInAction } from 'mobx';
 import BaseStore from '../BaseStore/BaseStore';
 
-class BaseViewModel<Model> extends BaseStore {
-  private _data: Partial<Model>;
+class BaseViewModel<T> extends BaseStore {
+  private _data: Partial<T>;
 
-  constructor(data: Partial<Model>) {
-    super();
-    makeAutoObservable(this);
-    this._data = data;
-  }
+  private _errors: Record<string, string>;
 
   public get data() {
     return this._data;
   }
 
-  public set data(data: Partial<Model>) {
+  public get errors() {
+    return this._errors;
+  }
+
+  constructor(data: Partial<T>) {
+    super();
     this._data = data;
+    this._errors = {};
+    makeAutoObservable(this);
+  }
+
+  public clear() {
+    runInAction(() => {
+      this._data = {};
+      this._errors = {};
+    });
   }
 }
 
