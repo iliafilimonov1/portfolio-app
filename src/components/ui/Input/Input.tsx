@@ -16,9 +16,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
   postfix,
 }, ref) => {
   const onChangeHandler = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value: val } = e.target;
-    if (onChange) {
-      onChange(val);
+    if (e.target.value) {
+      const { value: val } = e.target;
+      if (onChange) {
+        onChange(val);
+      }
     }
   }, [onChange]);
 
