@@ -126,6 +126,8 @@ module.exports = {
     'no-plusplus': 'off',
     '@typescript-eslint/member-delimiter-style': ['error'
     ],
-    'no-param-reassign': ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }]
+    'no-param-reassign': ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }],
+    // Игнорирование файлов, соответствующих паттерну "jest.config.js"
+    "ignorePatterns": ["jest.config.js"]
   },
 };
