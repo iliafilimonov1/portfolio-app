@@ -32,8 +32,6 @@
     "**/*.spec.tsx",
     "node_modules"
   ],
-  // Расширение конфигурации через tsconfig.paths.json
-  "extends": "./tsconfig.paths.json",
   // Файлы, включаемые в проект
   "files": [
     "./typings/index.d.ts"
