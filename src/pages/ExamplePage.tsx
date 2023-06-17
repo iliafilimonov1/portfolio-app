@@ -5,8 +5,17 @@ import { observer } from 'mobx-react-lite';
 import useStores from '@/hooks/useStores';
 import { Student } from '@/store/StudentsStore/StudentsStore';
 import Table from '@/components/ui/Table/Table';
+import Select from '@/components/ui/Select/Select';
+import { SelectOption } from '@/components/ui/Select/types';
+
+const options = [
+  { id: 'ugf765bt', title: 'Option 1' },
+  { id: 'option2', title: 'Option 2' },
+  { id: 'option3', title: 'Option 3' },
+];
 
 const ExamplePage: React.FC = () => {
+  const [selectedValue, setSelectedValue] = useState<SelectOption | undefined>(options[1]);
   const { studentsStore } = useStores();
 
   const [data, setData] = useState<Student>(); // данные пользака
@@ -38,6 +47,11 @@ const ExamplePage: React.FC = () => {
         <Input
           id="surname"
           value={data?.surname}
+        />
+        <Select
+          onSelect={(option) => setSelectedValue(option)}
+          options={options}
+          selectedOption={selectedValue}
         />
         <Button
           type="submit"
