@@ -10,7 +10,6 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@next/font": "13.1.2",
     "@react-pdf-viewer/core": "^3.7.0",
     "@react-pdf-viewer/default-layout": "^3.10.0",
     "@reduxjs/toolkit": "^1.9.1",
