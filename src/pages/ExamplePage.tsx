@@ -1,6 +1,6 @@
 import Button from '@/components/ui/Button/Button';
 import Input from '@/components/ui/Input/Input';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import useStores from '@/hooks/useStores';
 import { Student } from '@/store/StudentsStore/StudentsStore';
@@ -20,13 +20,13 @@ const ExamplePage: React.FC = () => {
 
   const [data, setData] = useState<Student>(); // данные пользака
 
-  const onInputHandler = (e: React.FormEvent<HTMLFormElement>) => {
+  const onInputHandler = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     const target = e.target as HTMLInputElement;
     setData({
       ...data,
       [target.id as keyof typeof data]: target.value,
     });
-  };
+  }, [data]);
 
   const onsubmitHandler = () => {
     studentsStore.addNewStudent(data ?? {});
