@@ -1,4 +1,4 @@
-import { extractStyles } from '@/services/utils';
+import { extractStyles } from '../../../services/utils'; // for pass tests
 import React, { forwardRef, useCallback } from 'react';
 import { InputProps } from './types';
 
