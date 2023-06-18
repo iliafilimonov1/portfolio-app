@@ -2,7 +2,7 @@ import { makeAutoObservable } from 'mobx';
 import BaseStore from './BaseStore';
 
 class BaseViewModel<T> extends BaseStore {
-  private _data?: Partial<T>;
+  private _data: Partial<T>;
 
   private _errors?: Record<string, string>;
 
