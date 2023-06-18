@@ -1,4 +1,6 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, {
+  useRef, useState, useEffect, useCallback,
+} from 'react';
 import { GoChevronDown } from 'react-icons/go';
 import { useOnClickOutside } from 'usehooks-ts';
 import Input from '../Input/Input';
@@ -6,7 +8,10 @@ import { SelectOption, SelectProps } from './types';
 
 const Select: React.FC<SelectProps> = ({ options, onSelect, selectedOption }) => {
   const containerRef = useRef<HTMLDivElement>(null);
+
   const [isOpen, setIsOpen] = useState(false); // открытие/закрытие списка
+
+  const [selectedValue, setSelectedValue] = useState<SelectOption | null>(selectedOption); // отслеживание выбранного значения
 
   // отслеживание индекса выбранного элемента в списке
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
@@ -17,21 +22,38 @@ const Select: React.FC<SelectProps> = ({ options, onSelect, selectedOption }) =>
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const lastIndex = options.length - 1;
 
+    const closeSelect = () => {
+      setIsOpen(false);
+    };
+
+    const navigateUp = () => {
+      setSelectedIndex((prevIndex) => (prevIndex === null || prevIndex === 0 ? lastIndex : prevIndex - 1));
+    };
+
+    const navigateDown = () => {
+      setSelectedIndex((prevIndex) => (prevIndex === null || prevIndex === lastIndex ? 0 : prevIndex + 1));
+    };
+
     switch (e.key) {
       case 'Enter':
         e.preventDefault();
         setIsOpen(!isOpen);
+
+        if (selectedIndex !== null) {
+          setSelectedValue(options[selectedIndex]);
+        }
+
         break;
       case 'Escape':
-        setIsOpen(false);
+        closeSelect();
         break;
       case 'ArrowUp':
         e.preventDefault();
-        setSelectedIndex((prevIndex) => (prevIndex === null || prevIndex === 0 ? lastIndex : prevIndex - 1));
+        navigateUp();
         break;
       case 'ArrowDown':
         e.preventDefault();
-        setSelectedIndex((prevIndex) => (prevIndex === null || prevIndex === lastIndex ? 0 : prevIndex + 1));
+        navigateDown();
         break;
       default:
         break;
@@ -39,27 +61,27 @@ const Select: React.FC<SelectProps> = ({ options, onSelect, selectedOption }) =>
   };
 
   // клик по селекту
-  const handleToggle = () => {
-    setIsOpen(!isOpen);
-  };
+  const handleToggle = useCallback(() => {
+    setIsOpen((prevIsOpen) => !prevIsOpen);
+
+    setSelectedValue((prevValue) => (!isOpen ? selectedOption || null : prevValue));
+  }, [isOpen, selectedOption]);
 
   // клик по пункту в выпадающем списке
-  const handleOptionClick = (value: SelectOption, index: number) => {
+  const handleOptionClick = useCallback((value: SelectOption, index: number) => {
     setSelectedIndex(index);
     onSelect?.(value);
+    setSelectedValue(value);
     setIsOpen(false);
-  };
+  }, [onSelect]);
 
   useEffect(() => {
-    const index = options.findIndex((option) => option.title === selectedOption?.title);
-    setSelectedIndex(index !== -1 ? index : null);
+    setSelectedIndex(options.findIndex((option) => option.title === selectedOption?.title) || null);
   }, [selectedOption, options]);
 
   useEffect(() => {
-    if (selectedIndex !== null) {
-      onSelect?.(options[selectedIndex]);
-    }
-  }, [selectedIndex, onSelect, options]);
+    setSelectedValue(selectedOption || null);
+  }, [selectedOption]);
 
   return (
     <div
@@ -70,7 +92,7 @@ const Select: React.FC<SelectProps> = ({ options, onSelect, selectedOption }) =>
       <Input
         className="cursor-pointer"
         onKeyDown={handleKeyDown}
-        value={selectedOption?.title}
+        value={selectedValue ? selectedValue.title : ''}
         readOnly
       />
       <GoChevronDown
