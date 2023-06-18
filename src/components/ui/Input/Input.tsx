@@ -12,6 +12,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
   onBlur,
   placeholder,
   className,
+  readOnly,
   onClick,
   onKeyDown,
   error,
@@ -56,6 +57,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
           onClick={onClick}
           onKeyDown={onKeyDown}
           placeholder={placeholder}
+          readOnly={readOnly}
           type="text"
           value={value || ''}
         />

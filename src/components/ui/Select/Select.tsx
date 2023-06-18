@@ -71,6 +71,7 @@ const Select: React.FC<SelectProps> = ({ options, onSelect, selectedOption }) =>
         className="cursor-pointer"
         onKeyDown={handleKeyDown}
         value={selectedOption?.title}
+        readOnly
       />
       <GoChevronDown
         className={`absolute top-1/2 mt-[-8px] right-3 transform transition-transform ${isOpen ? 'rotate-180' : ''} cursor-pointer`}
