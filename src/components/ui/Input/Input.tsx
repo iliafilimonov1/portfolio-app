@@ -11,7 +11,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
   onChange,
   onBlur,
   placeholder,
+  className,
   onClick,
+  onKeyDown,
   error,
   postfix,
 }, ref) => {
@@ -47,11 +49,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
       >
         <input
           ref={ref}
-          className="outline-none flex-1"
+          className={`outline-none flex-1 px-2 ${className || ''}`}
           id={id}
           onBlur={onBlur}
           onChange={onChangeHandler}
           onClick={onClick}
+          onKeyDown={onKeyDown}
           placeholder={placeholder}
           type="text"
           value={value || ''}
