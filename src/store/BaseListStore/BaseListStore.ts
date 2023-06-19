@@ -1,14 +1,13 @@
-import { makeAutoObservable } from 'mobx';
+import { makeObservable, observable } from 'mobx';
 import BaseStore from '../BaseStore/BaseStore';
-import { IViewModel } from '../BaseViewModel/types';
 
-class BaseListStore<T extends IViewModel<T>> extends BaseStore {
-  list: T[] = [];
+class BaseListStore<T extends Object> extends BaseStore {
+  @observable public list: T[] = [];
 
   constructor(data: T[]) {
     super();
-    makeAutoObservable(this);
     this.list = data;
+    makeObservable(this);
   }
 }
 

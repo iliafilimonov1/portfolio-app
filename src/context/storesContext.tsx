@@ -1,12 +1,12 @@
 import React from 'react';
 import { UserStore } from '@/store/UserStore/UserStore';
-import StudentStore from '@/store/StudentStore/StudentViewModel';
+import StudentsStore from '@/store/StudentsStore/StudentsStore';
 
 /** Создаем контекст сущностей (синглтон) для дальнейшей работы с ними */
 const storesContext = React.createContext({
   /** Сущность пользователя */
   userStore: new UserStore(),
-  studentStore: new StudentStore(),
+  studentsStore: new StudentsStore(),
 });
 
 export default storesContext;

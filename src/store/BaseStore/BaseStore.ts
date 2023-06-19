@@ -7,7 +7,11 @@ abstract class BaseStore {
   public _state?: StateStore;
 
   constructor() {
-    makeAutoObservable(this);
+    try {
+      makeAutoObservable(this);
+    } catch (error) {
+      console.warn(error);
+    }
   }
 
   /**

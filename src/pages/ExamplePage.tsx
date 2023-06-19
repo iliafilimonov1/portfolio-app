@@ -1,15 +1,14 @@
 import Button from '@/components/ui/Button/Button';
 import Input from '@/components/ui/Input/Input';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import useStores from '@/hooks/useStores';
-import { Student } from '@/store/StudentStore/StudentViewModel';
 import Table from '@/components/ui/Table/Table';
+import { Student } from '@/store/StudentStore/types';
 
 const ExamplePage: React.FC = () => {
-  const { studentStore } = useStores();
-
-  const [data, setData] = useState<Student>(); // данные пользака
+  const { studentsStore } = useStores();
+  const [data, setData] = useState<Partial<Student>>();
 
   const onInputHandler = (e: React.FormEvent<HTMLFormElement>) => {
     const target = e.target as HTMLInputElement;
@@ -20,9 +19,13 @@ const ExamplePage: React.FC = () => {
   };
 
   const onsubmitHandler = () => {
-    studentStore.addNewStudent(data ?? {});
+    studentsStore.addNewStudent(data);
     setData(undefined);
   };
+
+  useEffect(() => {
+    studentsStore.fetch();
+  }, []);
 
   return (
     <>
@@ -45,11 +48,12 @@ const ExamplePage: React.FC = () => {
           Submit form
         </Button>
       </form>
-
-      {
-        !!studentsStore.students?.length && <Table data={studentsStore.students} />
-      }
-
+      { !!studentsStore.list?.length && (
+        <Table<Student>
+          // @ts-ignore
+          data={studentsStore.list}
+        />
+      ) }
     </>
 
   );
