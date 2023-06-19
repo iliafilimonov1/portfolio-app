@@ -28,9 +28,11 @@ const ExamplePage: React.FC = () => {
     });
   }, [data]);
 
-  const onsubmitHandler = () => {
-    studentsStore.addNewStudent(data ?? {});
-    setData(undefined);
+  const onSubmitHandler = () => {
+    if (data && data.name && data.surname) {
+      studentsStore.addNewStudent(data);
+      setData(undefined);
+    }
   };
 
   return (
@@ -38,14 +40,13 @@ const ExamplePage: React.FC = () => {
       <form
         action="#"
         onInput={onInputHandler}
-        onSubmit={onsubmitHandler}
+        onSubmit={onSubmitHandler}
       >
         <Input
           className="mb-2"
           id="name"
           label="Your name"
-          value="asda"
-          disabled
+          value={data?.name}
 
         />
         <Input
@@ -61,19 +62,13 @@ const ExamplePage: React.FC = () => {
           options={options}
           selectedOption={selectedValue}
         />
-        <Button
-          type="submit"
-        >
+        <Button type="submit">
           Submit form
         </Button>
       </form>
 
-      {
-        !!studentsStore.students?.length && <Table data={studentsStore.students} />
-      }
-
+      <Table data={studentsStore.students || []} />
     </>
-
   );
 };
 
