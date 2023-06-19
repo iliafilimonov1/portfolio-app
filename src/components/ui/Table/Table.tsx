@@ -20,7 +20,7 @@ const Table:<T>(props: TableProps<T>)=> React.ReactElement = ({ data, headers })
     </thead>
     <tbody>
       {
-        !!data?.length && data.map((item, index) => (
+        data?.length ? data.map((item, index) => (
           <tr key={`${index.toString()}_`}>
             {headers.map((header) => (
               // TODO Разобраться с типами
@@ -29,6 +29,16 @@ const Table:<T>(props: TableProps<T>)=> React.ReactElement = ({ data, headers })
             ))}
           </tr>
         ))
+          : (
+            <tr>
+              <td
+                className="py-2 px-4 text-center border"
+                colSpan={2}
+              >
+                No students available
+              </td>
+            </tr>
+          )
       }
     </tbody>
   </table>

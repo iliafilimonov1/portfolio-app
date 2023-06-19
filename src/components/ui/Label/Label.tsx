@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { LabelProps } from './types';
 
-const Label: React.FC<LabelProps> = ({ children, size }) => {
+const Label: React.FC<LabelProps> = ({ children, size = 'x' }) => {
   const styles = useMemo(() => {
     switch (size) {
       case 's':
