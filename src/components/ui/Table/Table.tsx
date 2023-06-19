@@ -1,36 +1,45 @@
-import { Student } from '@/store/StudentsStore/StudentsStore';
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 
-const Table: React.FC<{ data: Student[] }> = ({ data }) => (
-  <table className="w-full border-collapse mt-4">
+interface TableProps<T> {
+  headers: {
+    key: keyof T;
+    name: string;
+  }[];
+  data: T[];
+}
+
+const Table:<T>(props: TableProps<T>)=> React.ReactElement = ({ data, headers }) => (
+  <table className="table">
     <thead>
       <tr>
-        <th className="py-2 px-4 font-medium bg-blue-200 text-blue-500 border border-blue-500">
-          Name
-        </th>
-        <th className="py-2 px-4 font-medium bg-blue-200 text-blue-500 border border-blue-500">
-          Surname
-        </th>
+        {headers.map((header) => (
+          <th key={header.key.toString()}>{header.name}</th>
+        ))}
       </tr>
     </thead>
     <tbody>
-      {data?.length ? (
-        data.map((student, key) => (
-          <tr key={`${key.toString()}_`}>
-            <td className="py-2 px-4 border">{student?.name}</td>
-            <td className="py-2 px-4 border">{student?.surname}</td>
+      {
+        data?.length ? data.map((item, index) => (
+          <tr key={`${index.toString()}_`}>
+            {headers.map((header) => (
+              // TODO Разобраться с типами
+              // @ts-ignore
+              <td key={`${header.key.toString()}${index.toString()}`}>{item[header.key]}</td>
+            ))}
           </tr>
         ))
-      ) : (
-        <tr>
-          <td
-            className="py-2 px-4 text-center border"
-            colSpan={2}
-          >
-            No students available
-          </td>
-        </tr>
-      )}
+          : (
+            <tr>
+              <td
+                className="py-2 px-4 text-center border"
+                colSpan={2}
+              >
+                No students available
+              </td>
+            </tr>
+          )
+      }
     </tbody>
   </table>
 );
