@@ -1,5 +1,5 @@
-import { extractStyles } from '../../../services/utils'; // for pass tests
 import React, { forwardRef, useCallback } from 'react';
+import { extractStyles } from '../../../services/utils'; // for pass tests
 import { InputProps } from './types';
 
 export type InputTypes = 'text' | 'number';
@@ -9,9 +9,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
   label,
   value,
   onChange,
+  className,
   onBlur,
   placeholder,
-  className,
+  disabled,
   readOnly,
   onClick,
   onKeyDown,
@@ -42,7 +43,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
       )}
       <div className={
         extractStyles`
-         input
+         
          ${error && 'border-red-600'}
          ${error && 'text-red-600'}
           `
@@ -50,7 +51,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(({
       >
         <input
           ref={ref}
-          className={`outline-none flex-1 px-2 ${className || ''}`}
+          className={`input ${disabled ? 'opacity-50 cursor-not-allowed' : ''} ${className || ''}`}
+          disabled={disabled}
           id={id}
           onBlur={onBlur}
           onChange={onChangeHandler}

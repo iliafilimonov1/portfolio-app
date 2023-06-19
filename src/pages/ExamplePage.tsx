@@ -9,9 +9,9 @@ import Select from '@/components/ui/Select/Select';
 import { SelectOption } from '@/components/ui/Select/types';
 
 const options = [
-  { id: 'ugf765bt', title: 'Option 1' },
-  { id: 'option2', title: 'Option 2' },
-  { id: 'option3', title: 'Option 3' },
+  { id: '1', title: 'Frontend-321' },
+  { id: '2', title: 'Frontend-322' },
+  { id: '3', title: 'Frontend-323' },
 ];
 
 const ExamplePage: React.FC = () => {
@@ -41,14 +41,22 @@ const ExamplePage: React.FC = () => {
         onSubmit={onsubmitHandler}
       >
         <Input
+          className="mb-2"
           id="name"
-          value={data?.name}
+          label="Your name"
+          value="asda"
+          disabled
+
         />
         <Input
+          className="mb-2"
           id="surname"
+          label="Your surname"
           value={data?.surname}
         />
         <Select
+          className="mb-2"
+          label="Group name"
           onSelect={(option) => setSelectedValue(option)}
           options={options}
           selectedOption={selectedValue}

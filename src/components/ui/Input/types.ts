@@ -9,6 +9,7 @@ export interface InputProps {
   placeholder?: string;
   onClick?: () => void;
   error?: string;
+  disabled?: boolean;
   postfix?: React.ReactNode;
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
 }
