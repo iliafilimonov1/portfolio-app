@@ -6,7 +6,7 @@ interface TableProps<T> {
     key: keyof T;
     name: string;
   }[];
-  data: Record<keyof T, any>[];
+  data: T[];
 }
 
 const Table:<T>(props: TableProps<T>)=> React.ReactElement = ({ data, headers }) => (
@@ -16,15 +16,19 @@ const Table:<T>(props: TableProps<T>)=> React.ReactElement = ({ data, headers })
         {headers.map((header) => (
           <th key={header.key.toString()}>{header.name}</th>
         ))}
-        <th>Name</th>
-        <th>Surname</th>
       </tr>
     </thead>
     <tbody>
       {
-        !!data?.length && data.map((item, index) => headers.map((header) => (
-          <td key={`${header.key.toString()}${index.toString()}`}>{item[header.key]}</td>
-        )))
+        !!data?.length && data.map((item, index) => (
+          <tr key={`${index.toString()}_`}>
+            {headers.map((header) => (
+              // TODO Разобраться с типами
+              // @ts-ignore
+              <td key={`${header.key.toString()}${index.toString()}`}>{item[header.key]}</td>
+            ))}
+          </tr>
+        ))
       }
     </tbody>
   </table>

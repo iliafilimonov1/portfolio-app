@@ -50,8 +50,11 @@ const ExamplePage: React.FC = () => {
       </form>
       { !!studentsStore.list?.length && (
         <Table<Student>
-          // @ts-ignore
           data={studentsStore.list}
+          headers={[
+            { key: 'name', name: 'Имя' },
+            { key: 'surname', name: 'Фамилия' },
+          ]}
         />
       ) }
     </>
