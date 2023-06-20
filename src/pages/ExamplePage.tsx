@@ -3,11 +3,11 @@ import Input from '@/components/ui/Input/Input';
 import React, { useCallback, useEffect, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import useStores from '@/hooks/useStores';
-import Table from '@/components/ui/Table/Table';
 import { Student } from '@/store/StudentStore/types';
 import { SelectOption } from '@/components/ui/Select/types';
 import Select from '@/components/ui/Select/Select';
 import { useToggle } from 'usehooks-ts';
+import Table from '@/components/ui/Table/Table';
 import Drawer from '../components/ui/Drawer/Drawer';
 
 const options = [
@@ -95,6 +95,7 @@ const ExamplePage: React.FC = () => {
           headers={[
             { key: 'name', name: 'Имя' },
             { key: 'surname', name: 'Фамилия' },
+            { key: 'address', name: 'Адрес' },
           ]}
           onRowClick={handleRowClick}
         />

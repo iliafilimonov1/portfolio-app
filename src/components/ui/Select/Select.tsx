@@ -12,46 +12,59 @@ const Select: React.FC<SelectProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
 
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState<SelectOption | null>(selectedOption);
+  const [
+    selectedValue,
+    setSelectedValue,
+  ] = useState<SelectOption | undefined | null>(selectedOption);
+
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
   useOnClickOutside(containerRef, () => setIsOpen(false));
 
+  const closeHandler = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    e.preventDefault();
+
     const lastIndex = options.length - 1;
 
-    const closeSelect = () => {
-      setIsOpen(false);
-    };
-
     const navigateUp = () => {
-      setSelectedIndex((prevIndex) => (prevIndex === null || prevIndex === 0 ? lastIndex : prevIndex - 1));
+      setSelectedIndex(
+        (prevIndex) => (prevIndex === null || prevIndex === 0 ? lastIndex : prevIndex - 1),
+      );
     };
 
     const navigateDown = () => {
-      setSelectedIndex((prevIndex) => (prevIndex === null || prevIndex === lastIndex ? 0 : prevIndex + 1));
+      setSelectedIndex(
+        (prevIndex) => (prevIndex === null || prevIndex === lastIndex ? 0 : prevIndex + 1),
+      );
     };
 
     switch (e.key) {
       case 'Enter':
-        e.preventDefault();
         setIsOpen(!isOpen);
 
         if (selectedIndex !== null) {
           setSelectedValue(options[selectedIndex]);
         }
-
         break;
       case 'Escape':
-        closeSelect();
+        closeHandler();
         break;
       case 'ArrowUp':
-        e.preventDefault();
         navigateUp();
         break;
       case 'ArrowDown':
-        e.preventDefault();
         navigateDown();
+        break;
+      case 'Tab':
+        if (e.shiftKey) {
+          navigateUp();
+        } else {
+          navigateDown();
+        }
         break;
       default:
         break;
@@ -84,15 +97,12 @@ const Select: React.FC<SelectProps> = ({
 
   return (
     <div>
-      {label && (
-        <div className="pb-1">{label}</div>
-      )}
+      {label && (<div className="pb-1">{label}</div>)}
       <div
         ref={containerRef}
         className={`relative h-8 ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'} ${className || ''}`}
         onClick={() => !disabled && setIsOpen(!isOpen)}
       >
-
         <Input
           className={`${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
           disabled={disabled}
@@ -124,7 +134,6 @@ const Select: React.FC<SelectProps> = ({
         )}
       </div>
     </div>
-
   );
 };
 
