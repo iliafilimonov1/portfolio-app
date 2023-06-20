@@ -67,7 +67,7 @@ const ExamplePage: React.FC = () => {
           Submit form
         </Button>
       </form>
-      { !!studentsStore.list?.length && (
+      {studentsStore.list?.length && (
         <Table<Student>
           data={studentsStore.list}
           headers={[
@@ -75,7 +75,7 @@ const ExamplePage: React.FC = () => {
             { key: 'surname', name: 'Фамилия' },
           ]}
         />
-      ) }
+      )}
     </>
   );
 };
