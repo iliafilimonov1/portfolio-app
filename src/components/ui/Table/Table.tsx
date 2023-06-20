@@ -1,45 +1,51 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 
 interface TableProps<T> {
-  headers: {
-    key: keyof T;
-    name: string;
-  }[];
+  headers: { key: keyof T; name: string }[];
   data: T[];
 }
 
-const Table:<T>(props: TableProps<T>)=> React.ReactElement = ({ data, headers }) => (
-  <table className="table">
+const Table = <T extends Partial<Record<keyof T, React.ReactNode>>>({
+  data,
+  headers,
+}: TableProps<T>): React.ReactElement => (
+  <table className="w-full border-collapse mt-4">
     <thead>
       <tr>
         {headers.map((header) => (
-          <th key={header.key.toString()}>{header.name}</th>
+          <th
+            key={header.key.toString()}
+            className="py-2 px-4 font-medium bg-blue-200 text-blue-500 border border-blue-500"
+          >
+            {header.name}
+          </th>
         ))}
       </tr>
     </thead>
     <tbody>
-      {
-        data?.length ? data.map((item, index) => (
+      {data?.length ? (
+        data.map((item, index) => (
           <tr key={`${index.toString()}_`}>
             {headers.map((header) => (
-              // TODO Разобраться с типами
-              // @ts-ignore
-              <td key={`${header.key.toString()}${index.toString()}`}>{item[header.key]}</td>
+              <td
+                key={`${header.key.toString()}${index.toString()}`}
+                className="py-2 px-4 border"
+              >
+                {item[header.key]}
+              </td>
             ))}
           </tr>
         ))
-          : (
-            <tr>
-              <td
-                className="py-2 px-4 text-center border"
-                colSpan={2}
-              >
-                No students available
-              </td>
-            </tr>
-          )
-      }
+      ) : (
+        <tr>
+          <td
+            className="py-2 px-4 text-center border"
+            colSpan={headers.length}
+          >
+            No students available
+          </td>
+        </tr>
+      )}
     </tbody>
   </table>
 );
