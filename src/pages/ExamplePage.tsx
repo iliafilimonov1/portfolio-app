@@ -7,6 +7,8 @@ import Table from '@/components/ui/Table/Table';
 import { Student } from '@/store/StudentStore/types';
 import { SelectOption } from '@/components/ui/Select/types';
 import Select from '@/components/ui/Select/Select';
+import { useToggle } from 'usehooks-ts';
+import Drawer from '../components/ui/Drawer/Drawer';
 
 const options = [
   { id: '1', title: 'Frontend-321' },
@@ -18,6 +20,8 @@ const ExamplePage: React.FC = () => {
   const [selectedValue, setSelectedValue] = useState<SelectOption | undefined>(options[1]);
   const { studentsStore } = useStores();
   const [data, setData] = useState<Partial<Student>>();
+  const [selectedStudent, setSelectedStudent] = useState<Partial<Student>>();
+  const [isDrawerOpen, setDrawerOpen] = useToggle(false); // открытие Drawer
 
   const onInputHandler = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     const target = e.target as HTMLInputElement;
@@ -32,12 +36,30 @@ const ExamplePage: React.FC = () => {
     setData(undefined);
   };
 
+  // открытие Drawer по клику на <tr>
+  const handleRowClick = (row: Student) => {
+    setSelectedStudent(row);
+    setDrawerOpen();
+  };
+
   useEffect(() => {
     studentsStore.fetch();
   }, []);
 
   return (
     <>
+      <Drawer
+        isOpen={isDrawerOpen}
+        position="right"
+        setIsOpen={setDrawerOpen}
+      >
+        {selectedStudent && (
+          <>
+            <h2>{selectedStudent.name}</h2>
+            <p>{selectedStudent.surname}</p>
+          </>
+        )}
+      </Drawer>
       <form
         action="#"
         onInput={onInputHandler}
@@ -74,6 +96,7 @@ const ExamplePage: React.FC = () => {
             { key: 'name', name: 'Имя' },
             { key: 'surname', name: 'Фамилия' },
           ]}
+          onRowClick={handleRowClick}
         />
       )}
     </>
