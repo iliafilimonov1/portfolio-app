@@ -1,14 +1,14 @@
-import { makeAutoObservable, runInAction } from 'mobx';
+import { makeObservable, observable, runInAction } from 'mobx';
 import StateStore from '../StateStores/StateStore';
 import { Status } from '../StateStores/types';
 
 /** Абстрактный базовый класс с состоянием */
 abstract class BaseStore {
-  public _state?: StateStore;
+  @observable public _state?: StateStore;
 
   constructor() {
     try {
-      makeAutoObservable(this);
+      makeObservable(this);
     } catch (error) {
       console.warn(error);
     }

@@ -1,14 +1,9 @@
-import { makeAutoObservable, runInAction } from 'mobx';
+import { runInAction } from 'mobx';
 import { required } from '@/services/decorators';
 import { IUser } from './types';
 import BaseViewModel from '../BaseViewModel/BaseViewModel';
 
 class UserViewMode extends BaseViewModel<IUser> {
-  constructor(data: IUser) {
-    super(data);
-    makeAutoObservable(this);
-  }
-
   public get id() {
     return this.data?.id;
   }

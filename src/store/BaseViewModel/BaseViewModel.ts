@@ -1,16 +1,18 @@
-import { makeAutoObservable, runInAction } from 'mobx';
+import {
+  computed, makeObservable, observable, runInAction,
+} from 'mobx';
 import BaseStore from '../BaseStore/BaseStore';
 
 class BaseViewModel<T> extends BaseStore {
-  private _data: Partial<T>;
+  @observable private _data: Partial<T>;
 
-  private _errors: Record<string, string>;
+  @observable private _errors: Record<string, string>;
 
-  public get data() {
+  @computed public get data() {
     return this._data;
   }
 
-  public get errors() {
+  @computed public get errors() {
     return this._errors;
   }
 
@@ -18,7 +20,7 @@ class BaseViewModel<T> extends BaseStore {
     super();
     this._data = data;
     this._errors = {};
-    makeAutoObservable(this);
+    makeObservable(this);
   }
 
   public clear() {
