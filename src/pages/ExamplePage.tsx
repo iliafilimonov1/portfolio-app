@@ -96,6 +96,7 @@ const ExamplePage: React.FC = () => {
             { key: 'name', name: 'Имя' },
             { key: 'surname', name: 'Фамилия' },
             { key: 'address', name: 'Адрес' },
+            { key: 'age', name: 'Возраст' },
           ]}
           onRowClick={handleRowClick}
         />
