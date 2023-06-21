@@ -1,105 +1,55 @@
-import Button from '@/components/ui/Button/Button';
-import Input from '@/components/ui/Input/Input';
-import React, { useCallback, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import useStores from '@/hooks/useStores';
 import { Student } from '@/store/StudentStore/types';
-import { SelectOption } from '@/components/ui/Select/types';
-import Select from '@/components/ui/Select/Select';
-import { useToggle } from 'usehooks-ts';
 import Table from '@/components/ui/Table/Table';
 import Drawer from '../components/ui/Drawer/Drawer';
-
-const options = [
-  { id: '1', title: 'Frontend-321' },
-  { id: '2', title: 'Frontend-322' },
-  { id: '3', title: 'Frontend-323' },
-];
+import StudentForm from '../components/ui/StudentForm/StudentForm';
 
 const ExamplePage: React.FC = () => {
-  const [selectedValue, setSelectedValue] = useState<SelectOption | undefined>(options[1]);
   const { studentsStore } = useStores();
-  const [data, setData] = useState<Partial<Student>>();
-  const [selectedStudent, setSelectedStudent] = useState<Partial<Student>>();
-  const [isDrawerOpen, setDrawerOpen] = useToggle(false); // открытие Drawer
+  const [selectedStudent, setSelectedStudent] = useState<Student | undefined>(undefined);
+  const [isDrawerOpen, setDrawerOpen] = useState(false);
 
-  const onInputHandler = useCallback((e: React.FormEvent<HTMLFormElement>) => {
-    const target = e.target as HTMLInputElement;
-    setData({
-      ...data,
-      [target.id as keyof typeof data]: target.value,
-    });
-  }, [data]);
-
-  const onSubmitHandler = (e: React.FormEvent | undefined) => {
-    e?.preventDefault();
-    studentsStore.addNewStudent({ ...data, groupName: selectedValue?.title });
-    setData(undefined);
-  };
-
-  // открытие Drawer по клику на <tr>
   const handleRowClick = (row: Student) => {
     setSelectedStudent(row);
-    setDrawerOpen();
+    setDrawerOpen(true);
   };
+
+  const handleDataSubmit = () => {
+    setDrawerOpen(false);
+  };
+
+  useEffect(() => {
+    const fakeStudents = [
+      {
+        id: '1', name: 'Иван', surname: 'Иванов', groupName: 'Группа 1', address: 'Адрес 1', age: 20,
+      },
+      {
+        id: '2', name: 'Петр', surname: 'Петров', groupName: 'Группа 2', address: 'Адрес 2', age: 22,
+      },
+      {
+        id: '3', name: 'Алексей', surname: 'Сидоров', groupName: 'Группа 3', address: 'Адрес 3', age: 19,
+      },
+    ];
+
+    studentsStore.list = fakeStudents;
+  }, [studentsStore]);
 
   return (
     <>
-      {isDrawerOpen && (
+      {isDrawerOpen && selectedStudent && (
         <Drawer
           header="Информация о студенте"
-          onClose={() => setDrawerOpen()}
+          onClose={() => setDrawerOpen(false)}
           position="right"
         >
-          {selectedStudent && (
-            <>
-              <h2>{selectedStudent.name}</h2>
-              <p>{selectedStudent.surname}</p>
-            </>
-          )}
+          <StudentForm
+            onDataSubmit={handleDataSubmit}
+            selectedValue={selectedStudent}
+          />
         </Drawer>
       )}
-      <form
-        action="#"
-        onInput={onInputHandler}
-        onSubmit={onSubmitHandler}
-      >
-        <Input
-          className="mb-2"
-          id="name"
-          label="Your name"
-          value={data?.name}
-
-        />
-        <Input
-          className="mb-2"
-          id="surname"
-          label="Your surname"
-          value={data?.surname}
-        />
-        <Input
-          className="mb-2"
-          id="address"
-          label="Your address"
-          value={data?.address}
-        />
-        <Input
-          className="mb-2"
-          id="age"
-          label="Your age"
-          value={data?.age?.toString()}
-        />
-        <Select
-          className="mb-2"
-          label="Group name"
-          onSelect={(option) => setSelectedValue(option)}
-          options={options}
-          selectedOption={selectedValue}
-        />
-        <Button type="submit">
-          Submit form
-        </Button>
-      </form>
       {!!studentsStore.list?.length && (
         <Table<Student>
           data={studentsStore.list}
