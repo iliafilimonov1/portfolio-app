@@ -3,11 +3,9 @@ import React, { useCallback, useState } from 'react';
 import { Globe, User } from 'lucide-react';
 import { AiFillFilePdf } from 'react-icons/ai';
 import { IoLogoApple } from 'react-icons/io';
-import { useToggle } from 'usehooks-ts';
 import { extractStyles } from '@/services/utils';
 import Button from '../ui/Button/Button';
 import { NavItem } from './types';
-import Drawer from '../ui/Drawer/Drawer';
 
 /** Элементы навишации */
 const navItems: NavItem[] = [
@@ -25,8 +23,6 @@ const Navigation: React.FC = () => {
   /** Для маршрутизации */
   const router = useRouter();
 
-  const [drawer, toggleDrawer] = useToggle();
-
   const [activeLink, setActiveLink] = useState<string>();
 
   const onClickLinkHandler = useCallback((link: string) => {
@@ -36,17 +32,6 @@ const Navigation: React.FC = () => {
 
   return (
     <header className="shadow bg-white h-16 mx-auto px-5 flex items-center justify-between">
-      <button
-        onClick={toggleDrawer}
-        type="button"
-      >
-        open drawer
-      </button>
-      <Drawer
-        isOpen={drawer}
-        position="left"
-        setIsOpen={toggleDrawer}
-      />
       <IoLogoApple
         onClick={() => router.push('/')}
         size={40}
