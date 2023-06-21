@@ -1,6 +1,6 @@
 import React from 'react';
 
-interface TableProps<T> {
+interface TableProps<T extends Partial<Record<keyof T, React.ReactNode>>> {
   headers: { key: keyof T; name: string }[];
   data: T[];
   onRowClick?: (row: T) => void;
@@ -18,7 +18,7 @@ const Table = <T extends Partial<Record<keyof T, React.ReactNode>>>({
   };
 
   return (
-    <table className="w-full border-collapse mt-4">
+    <table className="w-full border-collapse">
       <thead>
         <tr>
           {headers.map((header) => (

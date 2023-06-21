@@ -1,9 +1,7 @@
 import Button from '@/components/ui/Button/Button';
-import ResizeButton from '@/components/ui/Button/ResizeButton';
 import Modal from '@/components/ui/Modal/Modal';
 import React, { useState, useRef, useCallback } from 'react';
 import AvatarEditor from 'react-avatar-editor';
-import { RxAvatar } from 'react-icons/rx';
 import { useToggle } from 'usehooks-ts';
 
 const ReactAvatarEdit: React.FC = () => {
@@ -29,11 +27,6 @@ const ReactAvatarEdit: React.FC = () => {
   return (
     <div>
       <Button onClick={toggleShowModal}>Открыть модалку</Button>
-      <ResizeButton
-        icon={<RxAvatar />}
-        label="Кнопка"
-        loading={false}
-      />
       {showModal && (
         <Modal onClose={toggleShowModal}>
           {!file && (

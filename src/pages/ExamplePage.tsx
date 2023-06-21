@@ -1,6 +1,6 @@
 import Button from '@/components/ui/Button/Button';
 import Input from '@/components/ui/Input/Input';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import useStores from '@/hooks/useStores';
 import { Student } from '@/store/StudentStore/types';
@@ -31,8 +31,9 @@ const ExamplePage: React.FC = () => {
     });
   }, [data]);
 
-  const onSubmitHandler = () => {
-    studentsStore.addNewStudent(data);
+  const onSubmitHandler = (e: React.FormEvent | undefined) => {
+    e?.preventDefault();
+    studentsStore.addNewStudent({ ...data, groupName: selectedValue?.title });
     setData(undefined);
   };
 
@@ -42,24 +43,22 @@ const ExamplePage: React.FC = () => {
     setDrawerOpen();
   };
 
-  useEffect(() => {
-    studentsStore.fetch();
-  }, []);
-
   return (
     <>
-      <Drawer
-        isOpen={isDrawerOpen}
-        position="right"
-        setIsOpen={setDrawerOpen}
-      >
-        {selectedStudent && (
-          <>
-            <h2>{selectedStudent.name}</h2>
-            <p>{selectedStudent.surname}</p>
-          </>
-        )}
-      </Drawer>
+      {isDrawerOpen && (
+        <Drawer
+          header="Информация о студенте"
+          onClose={() => setDrawerOpen()}
+          position="right"
+        >
+          {selectedStudent && (
+            <>
+              <h2>{selectedStudent.name}</h2>
+              <p>{selectedStudent.surname}</p>
+            </>
+          )}
+        </Drawer>
+      )}
       <form
         action="#"
         onInput={onInputHandler}
@@ -78,6 +77,18 @@ const ExamplePage: React.FC = () => {
           label="Your surname"
           value={data?.surname}
         />
+        <Input
+          className="mb-2"
+          id="address"
+          label="Your address"
+          value={data?.address}
+        />
+        <Input
+          className="mb-2"
+          id="age"
+          label="Your age"
+          value={data?.age?.toString()}
+        />
         <Select
           className="mb-2"
           label="Group name"
@@ -89,12 +100,13 @@ const ExamplePage: React.FC = () => {
           Submit form
         </Button>
       </form>
-      {studentsStore.list?.length && (
+      {!!studentsStore.list?.length && (
         <Table<Student>
           data={studentsStore.list}
           headers={[
             { key: 'name', name: 'Имя' },
             { key: 'surname', name: 'Фамилия' },
+            { key: 'groupName', name: 'Наименование группы' },
             { key: 'address', name: 'Адрес' },
             { key: 'age', name: 'Возраст' },
           ]}
