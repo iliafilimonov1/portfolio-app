@@ -46,6 +46,7 @@ const ExamplePage: React.FC = () => {
         >
           <StudentForm
             onDataSubmit={handleDataSubmit}
+            // @ts-ignore
             selectedValue={selectedStudent}
           />
         </Drawer>
@@ -54,11 +55,11 @@ const ExamplePage: React.FC = () => {
         <Table<Student>
           data={studentsStore.list}
           headers={[
-            { key: 'name', name: 'Имя' },
-            { key: 'surname', name: 'Фамилия' },
-            { key: 'groupName', name: 'Наименование группы' },
+            { key: 'name', name: 'Имя', width: 120 },
+            { key: 'surname', name: 'Фамилия', width: 120 },
+            { key: 'age', name: 'Возраст', width: 120 },
+            { key: 'groupName', name: 'Наименование группы', width: 300 },
             { key: 'address', name: 'Адрес' },
-            { key: 'age', name: 'Возраст' },
           ]}
           onRowClick={handleRowClick}
         />
