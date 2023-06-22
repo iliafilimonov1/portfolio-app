@@ -29,6 +29,15 @@ class StudentsStore extends BaseListStore<Student> {
     });
   }
 
+  public updateStudent(updatedStudent: Student) {
+    runInAction(() => {
+      const index = this.list.findIndex((student) => student.id === updatedStudent.id);
+      if (index !== -1) {
+        this.list[index] = updatedStudent;
+      }
+    });
+  }
+
   public deleteStudent(id: string) {
     runInAction(() => {
       this.list = this.list.filter((i) => i.id !== id);
