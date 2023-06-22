@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite';
 import useStores from '@/hooks/useStores';
 import { Student } from '@/store/StudentStore/types';
 import Table from '@/components/ui/Table/Table';
+import Button from '@/components/ui/Button/Button';
 import Drawer from '../components/ui/Drawer/Drawer';
 import StudentForm from '../components/ui/StudentForm/StudentForm';
 
@@ -10,13 +11,27 @@ const ExamplePage: React.FC = () => {
   const { studentsStore } = useStores();
   const [selectedStudent, setSelectedStudent] = useState<Student | undefined>(undefined);
   const [isDrawerOpen, setDrawerOpen] = useState(false);
+  const [isFormEmpty, setFormEmpty] = useState(true);
 
   const handleRowClick = (row: Student) => {
     setSelectedStudent(row);
+    setFormEmpty(false);
     setDrawerOpen(true);
   };
 
-  const handleDataSubmit = () => {
+  const handleButtonClick = () => {
+    setSelectedStudent(undefined);
+    setFormEmpty(true);
+    setDrawerOpen(true);
+  };
+
+  const handleDataSubmit = (data: Student) => {
+    if (selectedStudent) {
+      studentsStore.updateStudent(data);
+    } else {
+      studentsStore.addNewStudent(data);
+    }
+
     setDrawerOpen(false);
   };
 
@@ -38,19 +53,26 @@ const ExamplePage: React.FC = () => {
 
   return (
     <>
-      {isDrawerOpen && selectedStudent && (
+      {isDrawerOpen && (
         <Drawer
-          header="Информация о студенте"
+          header={selectedStudent ? 'Информация о студенте' : 'Добавление студента'}
           onClose={() => setDrawerOpen(false)}
           position="right"
         >
           <StudentForm
+            // @ts-ignore
             onDataSubmit={handleDataSubmit}
             // @ts-ignore
-            selectedValue={selectedStudent}
+            selectedValue={isFormEmpty ? undefined : selectedStudent}
           />
         </Drawer>
       )}
+      <Button
+        onClick={handleButtonClick}
+        type="submit"
+      >
+        Добавить студента
+      </Button>
       {!!studentsStore.list?.length && (
         <Table<Student>
           data={studentsStore.list}
