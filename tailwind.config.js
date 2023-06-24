@@ -8,6 +8,9 @@ module.exports = {
   theme: {
     extend: {},
   },
+  presets: [
+    require('./theme.config'),
+  ],
   plugins: [
     require('./src/components/ui/tailwindClasses.config'),
     plugin(function({addComponents}){
