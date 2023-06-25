@@ -5,7 +5,6 @@ import { ReactPDFProps } from './types';
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`;
 
 const ReactPdf: React.FC<ReactPDFProps> = ({ pdfFileUrl, onConvert }) => {
-
   const handleConvertClick = useCallback(async (file: string) => {
     try {
       const pdf = await pdfjs.getDocument(file).promise;
@@ -22,13 +21,13 @@ const ReactPdf: React.FC<ReactPDFProps> = ({ pdfFileUrl, onConvert }) => {
       console.error(error);
       alert('An error occurred while converting the PDF to JPEG');
     }
-  }, [pdfjs, document]);
+  }, [onConvert]);
 
   useEffect(() => {
     if (pdfFileUrl) {
       handleConvertClick(pdfFileUrl);
     }
-  }, [pdfFileUrl]);
+  }, [handleConvertClick, pdfFileUrl]);
 
   return null;
 };

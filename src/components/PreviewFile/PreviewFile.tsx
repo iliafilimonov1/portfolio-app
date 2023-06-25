@@ -9,28 +9,27 @@ import { PreviewFileProps } from './types';
 
 const newPlugin = defaultLayoutPlugin();
 
-const PreviewFile: React.FC<PreviewFileProps> = ({ file, fileName, fileSize }) => 
-    (
-      <div className="bg-slate-50">
+const PreviewFile: React.FC<PreviewFileProps> = ({ file, fileName, fileSize }) => (
+  <div className="bg-slate-50">
 
-        <div className="w-full h-screen flex justify-between bg-slate-400">
-          <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.3.122/build/pdf.worker.min.js">
-            {file && (
-              <div className="w-[75vw] h-[80vh] overflow-hidden">
-                <Viewer
-                  fileUrl={file}
-                  plugins={[newPlugin as Plugin]}
-                />
-              </div>
-            )}
-
-          </Worker>
-          <div className="w-20 h-20 bg-slate-500">
-            <div>{fileName}</div>
-            <div>{fileSize}</div>
+    <div className="w-full h-screen flex justify-between bg-slate-400">
+      <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.3.122/build/pdf.worker.min.js">
+        {file && (
+          <div className="w-[75vw] h-[80vh] overflow-hidden">
+            <Viewer
+              fileUrl={file}
+              plugins={[newPlugin as Plugin]}
+            />
           </div>
-        </div>
+        )}
+
+      </Worker>
+      <div className="w-20 h-20 bg-slate-500">
+        <div>{fileName}</div>
+        <div>{fileSize}</div>
       </div>
-    );
+    </div>
+  </div>
+);
 
 export default React.memo(PreviewFile);

@@ -49,7 +49,7 @@ const CropImage: React.FC<{ file?: string }> = ({ file }) => {
       const base64Image = canvas.toDataURL('image/jpeg');
       setResult(base64Image);
     });
-  }, [document, image]);
+  }, [crop.height, crop.width, crop?.x, crop?.y, image]);
 
   return (
     <div className="container">

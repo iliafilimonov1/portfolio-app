@@ -28,7 +28,7 @@ const Navigation: React.FC = () => {
   const onClickLinkHandler = useCallback((link: string) => {
     router.push(link);
     setActiveLink(link);
-  }, []);
+  }, [router]);
 
   return (
     <header className="shadow bg-white h-16 mx-auto px-5 flex items-center justify-between">
