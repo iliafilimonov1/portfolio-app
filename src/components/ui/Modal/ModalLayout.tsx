@@ -23,6 +23,7 @@ const ModalLayout = forwardRef<HTMLDivElement, ModalLayoutProps>(({
     {children}
   </div>
 ));
+
 ModalLayout.displayName = 'ModalLayout';
 
 export default React.memo(ModalLayout);

@@ -8,7 +8,6 @@ const LoadFile: React.FC<LoadFileProps> = ({
   title = 'Select file',
   previewFileUrl,
 }) => {
-
   const loadFileHandler = useCallback((event:React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
     if (callBack && files?.length) {
@@ -37,20 +36,19 @@ const LoadFile: React.FC<LoadFileProps> = ({
             type="file"
           />
           { previewFileUrl
-              ? (
-                <div className="absolute top-0">
-                  {previewFileUrl.map((url) => (
-                    <img
-                      key={url}
-                      alt="droppedimage"
-                      className="z-0"
-                      src={url}
-                    />
-                  ))}
-                </div>
-              )
-              : <div className="absolute">Drop file...</div>
-          }
+            ? (
+              <div className="absolute top-0">
+                {previewFileUrl.map((url) => (
+                  <img
+                    key={url}
+                    alt="droppedimage"
+                    className="z-0"
+                    src={url}
+                  />
+                ))}
+              </div>
+            )
+            : <div className="absolute">Drop file...</div>}
         </div>
       </label>
     </div>

@@ -25,7 +25,7 @@ const Select: React.FC<SelectProps> = ({
     setIsOpen(false);
   }, []);
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = useCallback((e: React.KeyboardEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     const lastIndex = options.length - 1;
@@ -69,7 +69,7 @@ const Select: React.FC<SelectProps> = ({
       default:
         break;
     }
-  };
+  }, [closeHandler, isOpen, options, selectedIndex]);
 
   const handleToggle = useCallback(() => {
     if (!disabled) {

@@ -41,7 +41,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ selectedValue, onDataSubmit }
     }));
   }, []);
 
-  const onSubmitHandler: React.FormEventHandler<HTMLFormElement> = (e) => {
+  const onSubmitHandler: React.FormEventHandler<HTMLFormElement> = useCallback((e) => {
     e.preventDefault();
     const formData: FormData = { ...data };
     if (selectedValue && selectedValue.title) {
@@ -49,7 +49,7 @@ const StudentForm: React.FC<StudentFormProps> = ({ selectedValue, onDataSubmit }
     }
     onDataSubmit?.(formData);
     setData({});
-  };
+  }, [data, onDataSubmit, selectedValue]);
 
   return (
     <form
