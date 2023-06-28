@@ -1,5 +1,6 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React, { useCallback, useRef, useState } from 'react';
+import React, {
+  memo, useCallback, useRef, useState,
+} from 'react';
 
 interface TableProps<T extends Partial<Record<keyof T, React.ReactNode>>> {
   headers: { key: keyof T; name: string; width?: number }[];
@@ -25,7 +26,6 @@ const Table = <T extends Partial<Record<keyof T, React.ReactNode>>>({
 
   const dragHandler = useCallback((
     eventHeaderKey: keyof T,
-    event: React.DragEvent<HTMLHeadElement>,
   ) => {
     const newHeaders = [...localHeaders];
     const draggableHeaderIndex = localHeaders.findIndex((h) => h.key === draggableElement);
@@ -58,7 +58,7 @@ const Table = <T extends Partial<Record<keyof T, React.ReactNode>>>({
               key={header.key.toString()}
               className="py-2 px-4 font-medium bg-blue-200 text-blue-500 border border-blue-500 cursor-move"
               onDragOver={(e) => {
-                dragHandler(header.key, e);
+                dragHandler(header.key);
               }}
               onDragStart={() => setDraggableElement(header.key)}
               style={{
@@ -103,4 +103,4 @@ const Table = <T extends Partial<Record<keyof T, React.ReactNode>>>({
   );
 };
 
-export default Table;
+export default memo(Table);
