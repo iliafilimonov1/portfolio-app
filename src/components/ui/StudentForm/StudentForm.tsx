@@ -1,4 +1,6 @@
-import React, { useCallback, useState, useEffect } from 'react';
+import React, {
+  useCallback, useState, useEffect, memo,
+} from 'react';
 import Input from '@/components/ui/Input/Input';
 import Button from '@/components/ui/Button/Button';
 import { SelectOption } from '@/components/ui/Select/types';
@@ -93,4 +95,4 @@ const StudentForm: React.FC<StudentFormProps> = ({ selectedValue, onDataSubmit }
   );
 };
 
-export default StudentForm;
+export default memo(StudentForm);
