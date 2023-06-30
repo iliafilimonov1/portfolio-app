@@ -5,7 +5,8 @@ import React, { memo } from 'react';
 const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <>
     <Navigation />
-    {children}
+    <div className="p-4">{children}</div>
+    <footer>test</footer>
   </>
 );
 

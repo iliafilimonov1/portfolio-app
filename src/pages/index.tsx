@@ -1,9 +1,8 @@
-import Button from '@/components/ui/Button/Button';
+import { observer } from 'mobx-react-lite';
 import Head from 'next/head';
 import React from 'react';
-import { Mail } from 'lucide-react';
-import Switcher from '@/components/ui/Switcher/Switcher';
 
+/** Домашняя страница */
 const Home = () => (
   <div>
     <Head>
@@ -21,61 +20,8 @@ const Home = () => (
         rel="icon"
       />
     </Head>
-    <div className="d-flex">
-      <Button
-        size="sm"
-        variant="default"
-      >
-        Default
-      </Button>
-
-      <Button
-        size="sm"
-        variant="destructive"
-      >
-        Destructive
-      </Button>
-
-      <Button
-        size="sm"
-        variant="outline"
-      >
-        Outline
-      </Button>
-
-      <Button
-        size="sm"
-        variant="subtle"
-      >
-        Subtle
-      </Button>
-
-      <Button
-        size="sm"
-        variant="ghost"
-      >
-        Ghost
-      </Button>
-
-      <Button
-        size="sm"
-        variant="link"
-      >
-        Link
-      </Button>
-
-      <Button disabled>
-        Please wait
-      </Button>
-
-      <Button>
-        <Mail className="mr-2 h-4 w-4" />
-        Login with Email
-      </Button>
-
-    </div>
-    <Switcher />
+    <div className="px-6 py-10 grid grid-cols-2 gap-2" />
   </div>
 );
 
-export default Home;
+export default observer(Home);

@@ -30,8 +30,7 @@ module.exports = {
     'react',
     '@typescript-eslint',
     'import',
-  ],
-  ignorePatterns: ['./services/SignatureService.js'
+    'react-hooks'
   ],
   rules: {
     'no-unused-vars': 'off',
@@ -72,7 +71,7 @@ module.exports = {
     'import/extensions': 'off',
     'import/prefer-default-export': 'off',
 
-    'react-hooks/exhaustive-deps': 'off',
+    'react-hooks/exhaustive-deps': 'warn',
 
     'react/destructuring-assignment': ['error', 'always'
     ],
@@ -128,6 +127,6 @@ module.exports = {
     'no-plusplus': 'off',
     '@typescript-eslint/member-delimiter-style': ['error'
     ],
-    'no-param-reassign': ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }]
+    'no-param-reassign': ["error", { "props": true, "ignorePropertyModificationsFor": ["state", "descriptor"] }]
   },
 };

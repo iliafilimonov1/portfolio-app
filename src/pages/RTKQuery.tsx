@@ -2,7 +2,8 @@ import { Spinner } from '@/components/ui/Spinner/Spinner';
 import { useGetUsersQuery } from '@/store/usersApi';
 import React from 'react';
 
-const RTKQuery: React.FC = () => {
+/** Тест РТК */
+const RTKQuery: React.FC =  () => {
   const { data: users, isLoading } = useGetUsersQuery();
 
   return (

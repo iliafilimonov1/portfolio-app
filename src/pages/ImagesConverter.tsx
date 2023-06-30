@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '@/hooks/redux';
 import WalnutPreviewFile from '@/components/PreviewFile/PreviewFile';
 import { imageSlice } from '@/store/imagestore/ImageSlice';
 import CropImage from '@/components/CropImage/CropImage';
 import Dropzone from '@/components/ui/Dropzone/Dropzone';
 
+const fileType = ['application/pdf'];
+
+/** Конвертер в PDF */
 const ImagesConverter = () => {
   const { file, imageName, imageSize } = useAppSelector((state) => state.imageReducer);
   const { change } = imageSlice.actions;
@@ -12,9 +15,8 @@ const ImagesConverter = () => {
 
   const [error, setError] = useState<boolean>();
 
-  const fileType = ['application/pdf'];
 
-  const changeHandler = (files: File[]) => {
+  const changeHandler = useCallback((files: File[]) => {
     const selectedFile = files[0];
 
     if (selectedFile) {
@@ -34,14 +36,14 @@ const ImagesConverter = () => {
     } else {
       console.log('Please choose file!');
     }
-  };
+  }, [dispatch, change]);
+  
   return (
     <div className="flex flex-col">
       <div className="bg-slate-400">
         <Dropzone onDrop={changeHandler} />
         {error && <div>Необходим файл PDF</div>}
       </div>
-
       <div className="bg-blue-200">
         <WalnutPreviewFile
           file={(file as string) ?? ''}
@@ -49,7 +51,6 @@ const ImagesConverter = () => {
           fileSize={imageSize ?? ''}
         />
       </div>
-
       <div>
         <CropImage file={file} />
       </div>
@@ -57,4 +58,4 @@ const ImagesConverter = () => {
   );
 };
 
-export default ImagesConverter;
+export default React.memo(ImagesConverter);

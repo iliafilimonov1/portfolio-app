@@ -1,17 +1,19 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import { Spinner } from '@/components/ui/Spinner/Spinner';
 import LoadFile from '@/components/ui/LoadFile/LoadFile';
 import { extractStyles } from '@/services/utils';
-import { Languages } from '@/types';
-import React, { useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { createWorker } from 'tesseract.js';
+import { Languages } from '@/enums';
 
-const DEFAULT_LANGUAGE = 'eng';
+/** Язык по умолчанию */
+const DEFAULT_LANGUAGE: keyof typeof Languages = 'eng';
 
 /** Страница распознавания текста по картинке */
-const Tesseracts: React.FC = () => {
+const Tesseracts: React.FC = ()   =>  {
   const [recognizedText, setRecognizedText] = useState<string>();
+  /** Загруженное пользователем изображение */
   const [selectedImage, setSelectedImage] = useState<string[]>();
+  /** Массив доступных языков */
   const [language, setLanguage] = useState<keyof typeof Languages>(DEFAULT_LANGUAGE);
   const [progress, setProgress] = useState<number>();
 
@@ -19,15 +21,18 @@ const Tesseracts: React.FC = () => {
   const canShowProgress = progress && progress !== 100;
 
   /** Доступность кнопки очистки */
-  const canShowClearButton = !canShowProgress && (selectedImage || recognizedText);
+  const canShowClearButton = useMemo(
+    () => !canShowProgress && (selectedImage || recognizedText),
+    [],
+  );
 
   /** Обработчик прогресса в процентах */
-  const setProgressHandler = (progressNumber: number | undefined) => {
+  const setProgressHandler = useCallback((progressNumber: number | undefined) => {
     if (progressNumber) { setProgress(progressNumber * 100); } else { setProgress(undefined); }
-  };
+  }, [setProgress]);
 
   /** Функция для работы с tesseract */
-  const recognize = async (files: FileList) => {
+  const recognize = useCallback(async (files: FileList) => {
     if (!files.length) {
       return;
     }
@@ -50,24 +55,24 @@ const Tesseracts: React.FC = () => {
     } catch (error) {
       console.warn(error);
     }
-  };
+  }, [setRecognizedText]);
 
   /** Хэндлер очистки значений кроме выбора языка */
-  const clearHandler = () => {
+  const clearHandler = useCallback(() => {
     if (progress && progress !== 100) {
       return;
     }
     setSelectedImage(undefined);
     setRecognizedText(undefined);
     setProgressHandler(undefined);
-  };
+  }, [setSelectedImage, setRecognizedText, setProgressHandler, progress]);
 
   /** При изменении языка сбрасываем все */
-  const onSelectLanguageHandler = (event: React.ChangeEvent<HTMLSelectElement>) => {
+  const onSelectLanguageHandler = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value as keyof typeof Languages;
     setLanguage(value);
     clearHandler();
-  };
+  }, [clearHandler, setLanguage]);
 
   return (
     <div className="p-6 flex flex-col items-center gap-4">
@@ -124,4 +129,4 @@ const Tesseracts: React.FC = () => {
   );
 };
 
-export default Tesseracts;
+export default React.memo(Tesseracts);

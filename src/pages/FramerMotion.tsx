@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
+/** Пример анимаций */
 const pageAnimation = {
   hidden: {
     x: -100,
@@ -25,6 +26,7 @@ const textAnimation = {
   },
 };
 
+/** Пример использования библиотеки */
 const FramerMotion: React.FC = () => (
   <div>
     <motion.div
@@ -40,7 +42,6 @@ const FramerMotion: React.FC = () => (
         whileInView="visible"
 
       >
-        {' '}
         Screen 1
       </motion.div>
     </motion.div>
@@ -55,7 +56,6 @@ const FramerMotion: React.FC = () => (
         initial="hidden"
         variants={textAnimation}
         whileInView="visible"
-
       >
         Screen 2
       </motion.div>
@@ -73,7 +73,6 @@ const FramerMotion: React.FC = () => (
         whileInView="visible"
 
       >
-        {' '}
         Screen 3
       </motion.div>
     </motion.div>
@@ -90,11 +89,10 @@ const FramerMotion: React.FC = () => (
         whileInView="visible"
 
       >
-        {' '}
         Sreen 4
       </motion.div>
     </motion.div>
   </div>
 );
 
-export default FramerMotion;
+export default React.memo(FramerMotion);

@@ -8,11 +8,17 @@ module.exports = {
   theme: {
     extend: {},
   },
+  presets: [
+    require('./theme.config'),
+  ],
   plugins: [
+    require('./src/components/ui/tailwindClasses.config'),
     plugin(function({addComponents}){
       addComponents({
         /** Базовые стили свитчера */
-        '.switcher': require('./src/components/ui/Switcher/switcher.config')
+        '.switcher': require('./src/components/ui/Switcher/switcher.config'),
+        '.input': require('./src/components/ui/Input/input.config'),
+        '.button': require('./src/components/ui/Input/input.config'),
       })
     })
   ],

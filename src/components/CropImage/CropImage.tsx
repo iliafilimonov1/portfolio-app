@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import ReactCrop from 'react-image-crop';
 import 'react-image-crop/dist/ReactCrop.css';
 
+/** Компонент вырезания участка изображения */
 const CropImage: React.FC<{ file?: string }> = ({ file }) => {
   const [src, selectFile] = useState<string | undefined>(file);
-
-  console.log('file', file);
 
   const [image, setImage] = useState<HTMLImageElement>();
 
@@ -13,16 +12,17 @@ const CropImage: React.FC<{ file?: string }> = ({ file }) => {
 
   const [result, setResult] = useState<string>();
 
-  const changeHandle = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const changeHandle = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const urlFile = e.target.files ? URL.createObjectURL(e.target.files[0]) : undefined;
     selectFile(urlFile);
-  };
+  }, []);
 
   useEffect(() => {
     selectFile(file);
   }, [file]);
 
-  function getCroppedImg() {
+  /** Получить изображение */
+  const getCroppedImg = useCallback(() => {
     if (!image) {
       return;
     }
@@ -49,7 +49,7 @@ const CropImage: React.FC<{ file?: string }> = ({ file }) => {
       const base64Image = canvas.toDataURL('image/jpeg');
       setResult(base64Image);
     });
-  }
+  }, [crop.height, crop.width, crop?.x, crop?.y, image]);
 
   return (
     <div className="container">
@@ -62,39 +62,31 @@ const CropImage: React.FC<{ file?: string }> = ({ file }) => {
       </div>
 
       <div className="right">
-        {
-          src && (
-            <>
-              <ReactCrop
-                crop={crop}
-                onChange={
-                  (cropObj: ReactCrop.Crop) => setCrop(cropObj)
-                }
-                onImageLoaded={(e) => setImage(e)}
-                src={src}
-              />
-              <button
-                onClick={getCroppedImg}
-                type="submit"
-              >
-                Crop image
-              </button>
-            </>
-          )
-        }
-        {
-          result && (
-            <p>
-              <img
-                alt="asd"
-                src={result}
-              />
-            </p>
-          )
-        }
+        {src && (
+          <>
+            <ReactCrop
+              crop={crop}
+              onChange={(cropObj: ReactCrop.Crop) => setCrop(cropObj)}
+              onImageLoaded={(e) => setImage(e)}
+              src={src}
+            />
+            <button
+              onClick={getCroppedImg}
+              type="submit"
+            >
+              Crop image
+            </button>
+          </>
+        )}
+        {result && (
+          <img
+            alt="asd"
+            src={result}
+          />
+        )}
       </div>
     </div>
   );
 };
 
-export default CropImage;
+export default React.memo(CropImage);
