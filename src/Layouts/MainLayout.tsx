@@ -6,6 +6,7 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <>
     <Navigation />
     <div className="p-4">{children}</div>
+    <footer>test</footer>
   </>
 );
 
