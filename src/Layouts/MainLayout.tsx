@@ -1,7 +1,7 @@
 import Navigation from '@/components/Navigation/Navigation';
-import React from 'react';
+import React, { memo } from 'react';
 
-/** Обертка всех страниц */
+/** Обертка основного контента */
 const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   <>
     <Navigation />
@@ -10,4 +10,4 @@ const MainLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   </>
 );
 
-export default React.memo(MainLayout);
+export default memo(MainLayout);
