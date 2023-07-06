@@ -19,6 +19,12 @@ const frameworks = [
     description: 'Библиотека для редактирования автарки',
     icon: <RxAvatar size={50} />,
   },
+  {
+    link: 'ReactNumberFormat',
+    name: 'React-Number-Format',
+    description: 'Библиотека для ввода данных в поля с типом number динамически изменяя под формат',
+    icon: <RxAvatar size={50} />,
+  },
 ].map((f) => ({
   ...f,
   link: `/${PREFIX}/${f.link}`,
