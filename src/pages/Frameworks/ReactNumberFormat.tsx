@@ -12,24 +12,6 @@ const ReactNumberFormat: React.FC = () => {
         placeholder="Ввести"
         value={number}
       />
-      <PatternFormat
-        format="    -    -    -    "
-        onChange={(e) => setNumber(e.target.value)}
-        placeholder="Ввести"
-        value={number}
-      />
-      <PatternFormat
-        format="_ _ _ _ _ _ _ _"
-        onChange={(e) => setNumber(e.target.value)}
-        placeholder="Ввести"
-        value={number}
-      />
-      <PatternFormat
-        format="_ _ _ _ _ _ _ _"
-        onChange={(e) => setNumber(e.target.value)}
-        placeholder="Ввести"
-        value={number}
-      />
     </div>
   );
 };
