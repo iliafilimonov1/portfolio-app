@@ -25,6 +25,12 @@ const frameworks = [
     description: 'Библиотека для ввода данных в поля с типом number динамически изменяя под формат',
     icon: <RxAvatar size={50} />,
   },
+  {
+    link: 'ReactTable',
+    name: 'React-table',
+    description: 'Библиотека для создания таблиц',
+    icon: <RxAvatar size={50} />,
+  },
 ].map((f) => ({
   ...f,
   link: `/${PREFIX}/${f.link}`,

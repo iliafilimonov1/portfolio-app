@@ -103,13 +103,14 @@ const ReactTable: React.FC = () => {
 
   return (
     <div className="p-2">
-      <table>
+      <table className="border border-black">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
                 <th
                   key={header.id}
+                  className="border border-black"
                   colSpan={header.colSpan}
                 >
                   {header.isPlaceholder
@@ -127,7 +128,10 @@ const ReactTable: React.FC = () => {
           {table.getRowModel().rows.map((row) => (
             <tr key={row.id}>
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
+                <td
+                  key={cell.id}
+                  className="border border-black"
+                >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}
@@ -140,6 +144,7 @@ const ReactTable: React.FC = () => {
               {footerGroup.headers.map((header) => (
                 <th
                   key={header.id}
+                  className="border border-black"
                   colSpan={header.colSpan}
                 >
                   {header.isPlaceholder
