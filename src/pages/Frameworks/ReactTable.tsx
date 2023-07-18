@@ -103,7 +103,7 @@ const ReactTable: React.FC = () => {
 
   return (
     <div className="p-2">
-      <table className="border border-black">
+      <table className="border border-black w-full">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
@@ -138,7 +138,7 @@ const ReactTable: React.FC = () => {
             </tr>
           ))}
         </tbody>
-        <tfoot>
+        {/* <tfoot>
           {table.getFooterGroups().map((footerGroup) => (
             <tr key={footerGroup.id}>
               {footerGroup.headers.map((header) => (
@@ -157,7 +157,7 @@ const ReactTable: React.FC = () => {
               ))}
             </tr>
           ))}
-        </tfoot>
+        </tfoot> */}
       </table>
     </div>
   );
