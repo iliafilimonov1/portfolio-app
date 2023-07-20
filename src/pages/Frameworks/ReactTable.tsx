@@ -76,15 +76,12 @@ const columns = [
         columns: [
           columnHelper.accessor('visits', {
             header: () => <span>Visits</span>,
-            footer: (props) => props.column.id,
           }),
           columnHelper.accessor('status', {
             header: 'Status',
-            footer: (props) => props.column.id,
           }),
           columnHelper.accessor('progress', {
             header: 'Profile Progress',
-            footer: (props) => props.column.id,
           }),
         ],
       }),
@@ -138,26 +135,6 @@ const ReactTable: React.FC = () => {
             </tr>
           ))}
         </tbody>
-        {/* <tfoot>
-          {table.getFooterGroups().map((footerGroup) => (
-            <tr key={footerGroup.id}>
-              {footerGroup.headers.map((header) => (
-                <th
-                  key={header.id}
-                  className="border border-black"
-                  colSpan={header.colSpan}
-                >
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                      header.column.columnDef.footer,
-                      header.getContext(),
-                    )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </tfoot> */}
       </table>
     </div>
   );
