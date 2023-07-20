@@ -76,15 +76,12 @@ const columns = [
         columns: [
           columnHelper.accessor('visits', {
             header: () => <span>Visits</span>,
-            footer: (props) => props.column.id,
           }),
           columnHelper.accessor('status', {
             header: 'Status',
-            footer: (props) => props.column.id,
           }),
           columnHelper.accessor('progress', {
             header: 'Profile Progress',
-            footer: (props) => props.column.id,
           }),
         ],
       }),
