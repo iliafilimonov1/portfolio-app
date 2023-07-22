@@ -57,3 +57,12 @@ export const formPrint = async (url: string) => {
     }, 1);
   };
 };
+
+const strOrNumArray: string[] | number[] = [0, 1, 2];
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function isStringArray(array: any[]): array is string[] {
+  return array.every((i) => typeof i === 'string');
+}
+
+const test: string[] = strOrNumArray && isStringArray(strOrNumArray) ? strOrNumArray : [];
