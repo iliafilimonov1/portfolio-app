@@ -33,29 +33,29 @@ export function joinNonEmpty(arr: unknown[], separator: string = ' '): string {
 
 /** Метод для вывода печатной формы в браузере */
 export const formPrint = async (url: string) => {
-  const file = `${process.env.VITE_APP_API_URL ?? ''}/api/v1.0${url}`;
   const headers = new Headers();
-  headers.append('Authorization', `Bearer ${getToken()}`);
+  // headers.append('Authorization', `Bearer ${getToken()}`);
 
-  const response = await fetch(file, { headers });
-  if (response.status !== 200) {
-    throw response;
+  try {
+    const response = await fetch(url, { headers });
+    const blob = await response.blob();
+    const blobURL = URL.createObjectURL(blob);
+
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = blobURL;
+
+    document.body.appendChild(iframe);
+
+    iframe.onload = () => {
+      setTimeout(() => {
+        iframe.focus();
+        iframe.contentWindow?.print();
+      }, 1);
+    };
+  } catch (error) {
+    console.warn(error);
   }
-  const blob = await response.blob();
-  const blobURL = URL.createObjectURL(blob);
-
-  const iframe = document.createElement('iframe');
-  iframe.style.display = 'none';
-  iframe.src = blobURL;
-
-  document.body.appendChild(iframe);
-
-  iframe.onload = () => {
-    setTimeout(() => {
-      iframe.focus();
-      iframe.contentWindow?.print();
-    }, 1);
-  };
 };
 
 const strOrNumArray: string[] | number[] = [0, 1, 2];
@@ -66,3 +66,5 @@ export function isStringArray(array: any[]): array is string[] {
 }
 
 const test: string[] = strOrNumArray && isStringArray(strOrNumArray) ? strOrNumArray : [];
+
+console.log(test);
