@@ -65,6 +65,8 @@ export function isStringArray(array: any[]): array is string[] {
   return array.every((i) => typeof i === 'string');
 }
 
+export type RemoveDuplicateSlash<T extends string> = T extends `${infer S1}//${infer S2}` ? RemoveDuplicateSlash<`${S1}/${S2}`> : T;
+
 const test: string[] = strOrNumArray && isStringArray(strOrNumArray) ? strOrNumArray : [];
 
 console.log(test);
