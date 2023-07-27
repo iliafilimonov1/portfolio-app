@@ -69,4 +69,14 @@ export type RemoveDuplicateSlash<T extends string> = T extends `${infer S1}//${i
 
 const test: string[] = strOrNumArray && isStringArray(strOrNumArray) ? strOrNumArray : [];
 
+type TestType = {
+  name: string;
+  age: number;
+};
+
+const person = {
+  name: 'asdf',
+  age: 12,
+} satisfies TestType;
+
 console.log(test);
