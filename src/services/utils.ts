@@ -79,4 +79,22 @@ const person = {
   age: 12,
 } satisfies TestType;
 
+export function getStringWithDecimal(
+  value: string,
+  afterDecimalLength?: number,
+  min = -Infinity,
+  max = Infinity,
+) {
+  const mask = `{/^-\d*\\.?\\d{0,${afterDecimalLength}}/gi}`;
+  const afterDecimalPart = value.split('.')[1];
+  const beforeDecimalPart = value.split('.')[0];
+
+  const trimmedByFixedLength = afterDecimalPart.slice(0, afterDecimalLength);
+
+  const result = (mask as unknown as RegExp).exec(`${beforeDecimalPart + trimmedByFixedLength}`);
+
+  return (!Number.isNaN(result) && result)
+    ? Math.max(Math.min(+result, max), min)
+    : 0;
+}
 console.log(test);
