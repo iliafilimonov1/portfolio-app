@@ -85,7 +85,7 @@ export function getStringWithDecimal(
   min = -Infinity,
   max = Infinity,
 ) {
-  const mask = `{/^-\d*\\.?\\d{0,${afterDecimalLength}}/gi}`;
+  const mask = `{/^-\\d*\\.?\\d{0,${afterDecimalLength}}/gi}`;
   const afterDecimalPart = value.split('.')[1];
   const beforeDecimalPart = value.split('.')[0];
 
@@ -97,4 +97,32 @@ export function getStringWithDecimal(
     ? Math.max(Math.min(+result, max), min)
     : 0;
 }
+
+// eslint-disable-next-line max-len
+export const paramsSerializer = (request: Record<string, unknown>): string => Object.entries(request)
+  .filter(([key, value]) => {
+    if (value === false) {
+      return !!key;
+    }
+
+    return key && value;
+  })
+  .map(([key, value]) => {
+    if (Array.isArray(value)) {
+      return value.reduce<string>((acc, el, currentIndex) => {
+        if (currentIndex === 0) {
+          return `${key}=${el}`;
+        }
+        return `${acc}&${key}=${el}`;
+      }, '');
+    }
+    return `${key}=${value}`;
+  })
+  .reduce<string>((acc, el, currentIndex) => {
+  if (currentIndex === 0) {
+    return el;
+  }
+  return `${acc}&${el}`;
+}, '');
+
 console.log(test);
