@@ -125,4 +125,44 @@ export const paramsSerializer = (request: Record<string, unknown>): string => Ob
   return `${acc}&${el}`;
 }, '');
 
+/** Функция из swagger, возвращает наименование файла */
+export function extractFileNameFromContentDispositionHeader(value: string) {
+  const patterns = [
+    /filename\*=[^']+'\w*'"([^"]+)";?/i,
+    /filename\*=[^']+'\w*'([^;]+);?/i,
+    /filename="([^;]*);?"/i,
+    /filename=([^;]*);?/i,
+  ];
+
+  let responseFilename = <RegExpExecArray | null>{};
+  patterns.some((regex) => {
+    responseFilename = regex.exec(value);
+    return responseFilename !== null;
+  });
+
+  if (responseFilename !== null && responseFilename.length > 1) {
+    try {
+      return decodeURIComponent(responseFilename[1]);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+  return null;
+}
+
+/** Метод для export */
+export const downloadFile = (response: AxiosResponse) => {
+  const disposition = response.headers['content-disposition'] || response.headers['Content-Disposition'];
+  const responseFileName = extractFileNameFromContentDispositionHeader(disposition);
+
+  const url = URL.createObjectURL(response.data);
+
+  const anchor = document.createElement('a');
+  anchor.href = url;
+  anchor.download = responseFileName ?? 'Документ';
+  anchor.click();
+
+  URL.revokeObjectURL(url);
+};
+
 console.log(test);
